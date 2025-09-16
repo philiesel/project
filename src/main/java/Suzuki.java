@@ -3,12 +3,12 @@ public class Suzuki extends Car{
         super(name, model, yearMake, transmission, color, motor, door, carSeat);
     }
     @Override
-    void drive() {
+    public void drive() {
         System.out.println("Suzuki поехала");
     }
 
     @Override
-    void stop() {
+    public void stop() {
         System.out.println("Suzuki остановилась");
     }
 }

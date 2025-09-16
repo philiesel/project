@@ -4,12 +4,12 @@ public class Aurus extends Car{
     }
 
     @Override
-    void drive() {
+    public void drive() {
         System.out.println("Aurus поехала");
     }
 
     @Override
-    void stop() {
+    public void stop() {
         System.out.println("Aurus остановился");
     }
 }

@@ -3,12 +3,12 @@ public class Changan extends Car{
         super(name, model, yearMake, transmission, color, motor, door, carSeat);
     }
     @Override
-    void drive() {
+    public void drive() {
         System.out.println("Changan поехала");
     }
 
     @Override
-    void stop() {
+    public void stop() {
         System.out.println("Changan остановилась");
     }
 }
