@@ -4,12 +4,12 @@ public class Toyota extends Car{
     }
 
     @Override
-    void drive() {
+    public void drive() {
         System.out.println("Toyota поехала");
     }
 
     @Override
-    void stop() {
+    public void stop() {
         System.out.println("Toyota остановилась");
     }
 
