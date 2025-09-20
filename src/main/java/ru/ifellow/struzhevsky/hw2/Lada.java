@@ -1,3 +1,10 @@
+package ru.ifellow.struzhevsky.hw2;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Lada extends Car {
     private int countMirror;
 
@@ -6,22 +13,14 @@ public class Lada extends Car {
         this.countMirror = countMirror;
     }
 
-    public int getCountMirror() {
-        return countMirror;
-    }
-
-    public void setCountMirror(int countMirror) {
-        this.countMirror = countMirror;
-    }
-
     @Override
     public void drive() {
-        System.out.println("Lada поехала");
+        System.out.println("ru.ifellow.struzhevsky.hw2.Lada поехала");
     }
 
     @Override
     public void stop() {
-        System.out.println("Lada остановилась");
+        System.out.println("ru.ifellow.struzhevsky.hw2.Lada остановилась");
     }
 
     public void turnOnMusic() {
