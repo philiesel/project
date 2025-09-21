@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.login.LoginPage;
 import ru.ifellow.struzhevsky.hw3.pages.profile.ProfilePage;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthTest extends BaseTest {
