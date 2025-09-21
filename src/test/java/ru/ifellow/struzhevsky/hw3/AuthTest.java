@@ -8,13 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthTest extends BaseTest {
     private final LoginPage loginPage = new LoginPage();
+    private final String headerAuth = "Вход в систему";
+    private final String profileTitle = "Сводка";
 
     @Test
     public void authTest() {
-        assertEquals("Вход в систему", loginPage.getHeaderAuthorization());
+        assertEquals(headerAuth, loginPage.getHeaderAuthorization());
         DashboardPage dashboard = loginPage.auth(BaseTest.username, BaseTest.password);
         ProfilePage profile = dashboard.goToProfile();
-        assertEquals("Сводка", profile.getProfileTitle());
+        assertEquals(profileTitle, profile.getProfileTitle());
         assertEquals(BaseTest.username, profile.getProfileName());
     }
 }
