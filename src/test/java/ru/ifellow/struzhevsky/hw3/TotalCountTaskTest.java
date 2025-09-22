@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TotalCountTaskTest extends BaseTest{
     private LoginPage loginPage = new LoginPage();
     private ProjectPage projectPage = new ProjectPage();
-    private DashboardPage dashboardPage = new DashboardPage(); //Возможно стоит убрать
+    private DashboardPage dashboardPage = new DashboardPage();
     private FormTask formTask = new FormTask();
     private String descriptionTask = "Test Task";
     private String typeBugIssue = "Задача";
@@ -24,7 +24,7 @@ public class TotalCountTaskTest extends BaseTest{
         int countTask = projectPage.parsCountTaskOnProject();
         projectPage.clickButtNewTask();
         formTask.selectTypeBug(typeBugIssue);
-        formTask.fillFieldTopicTask(descriptionTask);
+        formTask.setFieldTopicTask(descriptionTask);
         formTask.clickButtCreateNewIssue();
         Selenide.refresh();
         int updateCountTask = projectPage.parsCountTaskOnProject();

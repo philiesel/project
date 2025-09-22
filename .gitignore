@@ -1,2 +1,5 @@
 target/
 .idea/
+/build/
+/src/test/resources/chromedriver.exe
+/src/test/resources/config.properties
