@@ -44,9 +44,9 @@ public class NewBugWithDescription extends BaseTest {
         formTask.setRelatedTasksLocator();
         formTask.setTask(task);
         formTask.clickButtAssignToMe();
-        formTask.setLinkToEpic(epic);
+        //formTask.setLinkToEpic(epic);
         formTask.setSprint(sprint);
-        formTask.setSeriousness(seriousness);
+        //formTask.setSeriousness(seriousness);
         formTask.clickButtCreateNewIssue();
     }
 }
