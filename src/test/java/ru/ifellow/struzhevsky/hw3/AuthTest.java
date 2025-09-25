@@ -1,5 +1,6 @@
 package ru.ifellow.struzhevsky.hw3;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.login.LoginPage;
@@ -12,9 +13,10 @@ public class AuthTest extends BaseTest {
     private final String profileTitle = "Сводка";
 
     @Test
+    @DisplayName("Пользователь может авторизоваться")
     public void authTest() {
         assertEquals(headerAuth, loginPage.getHeaderAuthorization());
-        DashboardPage dashboard = loginPage.auth(BaseTest.username, BaseTest.password);
+        DashboardPage dashboard = loginPage.auth(BaseTest.username, BaseTest.password);   //  DashboardPage dashboard вынести в класс
         ProfilePage profile = dashboard.goToProfile();
         assertEquals(profileTitle, profile.getProfileTitle());
         assertEquals(BaseTest.username, profile.getProfileName());

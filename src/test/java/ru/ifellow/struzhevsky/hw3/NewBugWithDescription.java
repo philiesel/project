@@ -1,5 +1,6 @@
 package ru.ifellow.struzhevsky.hw3;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.login.LoginPage;
@@ -26,6 +27,7 @@ public class NewBugWithDescription extends BaseTest {
     private String seriousness = "S0 Тривиальный/Trivial";
 
     @Test
+    @DisplayName("Проверка заведения нового бага с описанием")
     public void createNewBugWithDescription() {
         loginPage.auth(BaseTest.username, BaseTest.password);
         dashboardPage.goToProjectTest();

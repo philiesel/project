@@ -1,5 +1,6 @@
 package ru.ifellow.struzhevsky.hw3;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.login.LoginPage;
@@ -17,6 +18,7 @@ public class TaskTest extends BaseTest{
     private final String statusTask = "Сделать";
 
     @Test
+    @DisplayName("Проверка статуса и версии в задаче проекта")
     public void checkStatusAndVersionTask() {
         loginPage.auth(BaseTest.username, BaseTest.password);
         dashboardPage.goToProjectTest();
