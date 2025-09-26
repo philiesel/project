@@ -3,10 +3,10 @@ package ru.ifellow.struzhevsky.hw3;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
-import ru.ifellow.struzhevsky.hw3.pages.login.LoginPage;
-import ru.ifellow.struzhevsky.hw3.pages.project.ProjectPage;
-import ru.ifellow.struzhevsky.hw3.pages.task.FormTask;
+import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
+import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
+import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
+import ru.ifellow.struzhevsky.hw3.pages.FormTask;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TotalCountTaskTest extends BaseTest{

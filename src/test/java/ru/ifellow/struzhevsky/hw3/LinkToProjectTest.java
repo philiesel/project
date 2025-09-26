@@ -3,9 +3,9 @@ package ru.ifellow.struzhevsky.hw3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
-import ru.ifellow.struzhevsky.hw3.pages.login.LoginPage;
-import ru.ifellow.struzhevsky.hw3.pages.project.ProjectPage;
+import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
+import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
+import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LinkToProjectTest extends BaseTest {

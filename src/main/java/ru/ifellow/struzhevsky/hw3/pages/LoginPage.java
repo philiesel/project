@@ -1,7 +1,6 @@
-package ru.ifellow.struzhevsky.hw3.pages.login;
+package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import ru.ifellow.struzhevsky.hw3.pages.dashboard.DashboardPage;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;

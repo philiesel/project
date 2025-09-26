@@ -1,4 +1,4 @@
-package ru.ifellow.struzhevsky.hw3.pages.task;
+package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$x;

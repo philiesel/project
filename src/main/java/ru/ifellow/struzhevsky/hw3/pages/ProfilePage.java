@@ -1,4 +1,4 @@
-package ru.ifellow.struzhevsky.hw3.pages.profile;
+package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.SelenideElement;
 

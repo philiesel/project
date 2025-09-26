@@ -1,4 +1,4 @@
-package ru.ifellow.struzhevsky.hw3.pages.project;
+package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;

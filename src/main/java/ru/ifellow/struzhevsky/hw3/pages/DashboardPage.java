@@ -1,9 +1,7 @@
-package ru.ifellow.struzhevsky.hw3.pages.dashboard;
+package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import ru.ifellow.struzhevsky.hw3.pages.profile.ProfilePage;
-import ru.ifellow.struzhevsky.hw3.pages.project.ProjectPage;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
