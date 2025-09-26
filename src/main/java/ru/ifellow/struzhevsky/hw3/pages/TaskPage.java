@@ -1,6 +1,7 @@
 package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 public class TaskPage {
@@ -21,6 +22,6 @@ public class TaskPage {
     }
 
     public String checkVersion() {
-        return  statusVersion.getText();
+        return statusVersion.getText();
     }
 }

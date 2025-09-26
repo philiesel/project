@@ -7,9 +7,10 @@ import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
 import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
 import ru.ifellow.struzhevsky.hw3.pages.FormTask;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TotalCountTaskTest extends BaseTest{
+public class TotalCountTaskTest extends BaseTest {
     private LoginPage loginPage = new LoginPage();
     private ProjectPage projectPage = new ProjectPage();
     private DashboardPage dashboardPage = new DashboardPage();
@@ -30,6 +31,6 @@ public class TotalCountTaskTest extends BaseTest{
         formTask.clickButtCreateNewIssue();
         Selenide.refresh();
         int updateCountTask = projectPage.parsCountTaskOnProject();
-        assertTrue(updateCountTask > countTask,   "Ожидалось, что количество задач увеличится, но оно не увеличилось");
+        assertTrue(updateCountTask > countTask, "Ожидалось, что количество задач увеличится, но оно не увеличилось");
     }
 }

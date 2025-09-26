@@ -19,7 +19,7 @@ public class ProjectPage {
         return Integer.parseInt(countTask);
     }
 
-    public void clickMenuTask(){
+    public void clickMenuTask() {
         buttonTask.shouldBe(Condition.visible).click();
     }
 
@@ -31,7 +31,7 @@ public class ProjectPage {
         buttonCreateTask.click();
     }
 
-    public String getMetaValueProject(){
+    public String getMetaValueProject() {
         return metaValueProject.text();
     }
 
