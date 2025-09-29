@@ -1,4 +1,4 @@
-package ru.ifellow.struzhevsky.hw5.dto;
+package ru.ifellow.struzhevsky.hw5.exercise1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CharacterResponseDto {
+public class ResultDto {
     private InfoDto info;
     private List<CharacterDto> results;
 }
