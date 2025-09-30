@@ -8,10 +8,10 @@ import static com.codeborne.selenide.Selenide.page;
 
 
 public class DashboardPage {
-    private final SelenideElement buttonProfileLocator = $x("//a[@id='header-details-user-fullname']");
-    private final SelenideElement linkProfileLocator = $x("//a[@id='view_profile']");
-    private final SelenideElement menuProject = $x("//a[@id='browse_link']");
-    private final SelenideElement linkProjectTest = $x("//a[@id='admin_main_proj_link_lnk']");
+    private final SelenideElement buttonProfileLocator = $x("//a[@id='header-details-user-fullname']").as("Пользовательский профиль");
+    private final SelenideElement linkProfileLocator = $x("//a[@id='view_profile']").as("Меню \"Профиль\"");
+    private final SelenideElement menuProject = $x("//a[@id='browse_link']").as("Меню \"Проекты\"");
+    private final SelenideElement linkProjectTest = $x("//a[@id='admin_main_proj_link_lnk']").as("Меню проект \"Test\"");
 
     public ProfilePage goToProfile() {
         buttonProfileLocator.click();

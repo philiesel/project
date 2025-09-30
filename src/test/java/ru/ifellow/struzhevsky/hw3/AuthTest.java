@@ -16,7 +16,7 @@ public class AuthTest extends BaseTest {
     @DisplayName("Пользователь может авторизоваться")
     public void authTest() {
         assertEquals(headerAuth, loginPage.getHeaderAuthorization());
-        DashboardPage dashboard = loginPage.auth(BaseTest.username, BaseTest.password);   //  DashboardPage dashboard вынести в класс
+        DashboardPage dashboard = loginPage.auth(BaseTest.username, BaseTest.password);
         ProfilePage profile = dashboard.goToProfile();
         assertEquals(profileTitle, profile.getProfileTitle());
         assertEquals(BaseTest.username, profile.getProfileName());
