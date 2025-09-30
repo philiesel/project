@@ -6,12 +6,12 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ProjectPage {
-    private final SelenideElement countTaskOnProject = $x("//div[@class='showing']/span");
-    private final SelenideElement linkAllTask = $x("//a[text()='Посмотреть все задачи и фильтры']");
-    private final SelenideElement buttonCreateTask = $x("//a[@id='create_link']");  // заменить
-    private final SelenideElement metaValueProject = $x("//dd[@class='project-meta-value' and text()='TEST']");
-    private final SelenideElement buttonTask = $x("//a[.//span[@class='aui-nav-item-label' and @title='Задачи']]");
-    private final SelenideElement buttonAvatar = $x("//a[@title='Test' and contains(@class, 'jira-project-avatar')]");
+    private final SelenideElement countTaskOnProject = $x("//div[@class='showing']/span").as("Надпись кол-во задач");
+    private final SelenideElement linkAllTask = $x("//a[text()='Посмотреть все задачи и фильтры']").as("Все задачи и фильтры");
+    private final SelenideElement buttonCreateTask = $x("//a[@id='create_link']").as("Создать новую задачу");  // заменить
+    private final SelenideElement metaValueProject = $x("//dd[@class='project-meta-value' and text()='TEST']").as("Тег проекта");
+    private final SelenideElement buttonTask = $x("//a[.//span[@class='aui-nav-item-label' and @title='Задачи']]").as("Кнопка \"Задачи\"");
+    private final SelenideElement buttonAvatar = $x("//a[@title='Test' and contains(@class, 'jira-project-avatar')]").as("Аватарка");
 
     public int parsCountTaskOnProject() {
         String taskText = countTaskOnProject.shouldBe(Condition.visible).text();
