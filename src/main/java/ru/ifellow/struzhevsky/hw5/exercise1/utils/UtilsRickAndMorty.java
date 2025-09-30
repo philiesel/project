@@ -17,4 +17,14 @@ public class UtilsRickAndMorty {
         List<String> lastEpisodeCharacters = episodeDto.getCharacters();
         return lastEpisodeCharacters.get(lastEpisodeCharacters.size() - 1);
     }
+
+    public static boolean checkSameSpeciesOrLocation(CharacterDto character1, CharacterDto character2) {
+        String character1Species = character1.getSpecies();
+        String character1Location = character1.getLocation().getName();
+        String anotherCharacterSpecies = character2.getSpecies();
+        String anotherCharacterLocation = character2.getLocation().getName();
+
+        return character1Species.equalsIgnoreCase(anotherCharacterSpecies) ||
+                character1Location.equalsIgnoreCase(anotherCharacterLocation);
+    }
 }
