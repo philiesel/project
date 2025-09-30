@@ -10,13 +10,13 @@ import ru.ifellow.struzhevsky.hw5.exercise1.utils.UtilsRickAndMorty;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SearchCharacterTest {
+public class CharacterTest {
     private final BaseApi baseApi = new BaseApi();
     private final UtilsRickAndMorty utilsRickAndMorty = new UtilsRickAndMorty();
     private String characterName = "Morty Smith";
 
     @Test
-    public void testGetRequest() {
+    public void testCheckSameCharacter() {
         Response response = baseApi.getCharacterByName(characterName);
         ResultDto resultsDto = response.jsonPath().getObject("", ResultDto.class);
         String lastEpisodeUrl = utilsRickAndMorty.getLastEpisode(resultsDto);
