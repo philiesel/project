@@ -3,28 +3,18 @@ package ru.ifellow.struzhevsky.hw3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
+import ru.ifellow.struzhevsky.hw3.pages.FormTask;
 import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
 import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
-import ru.ifellow.struzhevsky.hw3.pages.FormTask;
+import ru.ifellow.struzhevsky.hw3.utils.TestData;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NewBugWithDescription extends BaseTest {
     private LoginPage loginPage = new LoginPage();
     private ProjectPage projectPage = new ProjectPage();
     private DashboardPage dashboardPage = new DashboardPage();
     private FormTask formTask = new FormTask();
-
-    private String typeBug = "Ошибка";
-    private String topicBug = "Баг тест";
-    private String descriptionTask = "Баг описание";
-    private String fixVersion = "Неизвестный";
-    private String priority = "Medium";
-    private String tag = "test";
-    private String affectedVersion = "Неизвестный";
-    private String environmentDescription = "Описание окружения";
-    private String task = "task";
-    private String epic = "Epic";
-    private String sprint = "Доска Спринт 1";
-    private String seriousness = "S0 Тривиальный/Trivial";
 
     @Test
     @DisplayName("Проверка заведения нового бага с описанием")
@@ -33,22 +23,22 @@ public class NewBugWithDescription extends BaseTest {
         dashboardPage.goToProjectTest();
         projectPage.clickMenuTask();
         projectPage.clickButtNewTask();
-
-        formTask.selectVisualButtonOnDescriptionTask(); //  необходимо убедиться (если не так, то прожать кнопку), что в полях «Описание» и «Окружение»   выбрано «Визуальный»
-        formTask.selectTypeBug(typeBug);
-        formTask.setFieldTopicTask(topicBug);
-        formTask.setDescriptionTask(descriptionTask);
-        formTask.setfixVersion(fixVersion);
-        formTask.selectPriorityField(priority);
-        formTask.setTag(tag);
-        //formTask.setEnvironmentDescription(environmentDescription);
-        formTask.setAffectedVersions(affectedVersion);
-        formTask.setRelatedTasksLocator();
-        formTask.setTask(task);
+        formTask.selectVisualButtonOnDescriptionTask();
+        formTask.selectTypeBug(TestData.TYPE_BUG);  // переделка
+        formTask.setFieldTopicTask(TestData.TOPIC_BUG);
+        formTask.setDescriptionTask(TestData.DESCRIPTION_TASK);
+        formTask.setfixVersion(TestData.FIX_VERSION);
+        formTask.selectPriorityField(TestData.PRIORITY);
+        formTask.setTag(TestData.TAG);
+        formTask.setEnvironmentDescription(TestData.ENVIRONMENT_DESCRIPTION);
+        formTask.setAffectedVersions(TestData.AFFECTED_VERSION);
+        formTask.setRelatedTasksLocator(TestData.RELATED_TASK);
+        formTask.setTask(TestData.TASK);
         formTask.clickButtAssignToMe();
-        //formTask.setLinkToEpic(epic);
-        formTask.setSprint(sprint);
-        //formTask.setSeriousness(seriousness);
+        formTask.setLinkToEpic(TestData.EPIC);
+        formTask.setSprint(TestData.SPRINT);
+        formTask.setSeriousness(TestData.SERIOUSNESS);
         formTask.clickButtCreateNewIssue();
+        assertTrue(formTask.getStatusTask(), "Задача не была создана!");
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
 import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LinkToProjectTest extends BaseTest {

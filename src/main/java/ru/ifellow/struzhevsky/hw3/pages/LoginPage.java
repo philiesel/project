@@ -5,20 +5,20 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
     private final SelenideElement usernameFieldLocator = $x("//input[@id='login-form-username']").as("Поле Username");
     private final SelenideElement passwordFieldLocator = $x("//input[@id='login-form-password']").as("Поле Password");
     private final SelenideElement loginButtonLocator = $x("//input[@name='login' and @value='Войти']").as("Кнопка войти");
     private final SelenideElement headerAuthorizationLocator = $x("//h3[@id='gadget-0-title']").as("Заголовок входа в систему");
 
-    private void enterUsername(String username) {
-        usernameFieldLocator.clear();
-        usernameFieldLocator.setValue(username);
+    private LoginPage enterUsername(String username) {
+        clickAndSet(usernameFieldLocator, username);
+        return this;
     }
 
-    private void enterPassword(String password) {
-        passwordFieldLocator.clear();
-        passwordFieldLocator.setValue(password);
+    private LoginPage enterPassword(String password) {
+        clickAndSet(passwordFieldLocator, password);
+        return this;
     }
 
     public DashboardPage auth(String username, String password) {

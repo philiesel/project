@@ -3,134 +3,127 @@ package ru.ifellow.struzhevsky.hw3.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selenide.*;
+import java.time.Duration;
 
-public class FormTask {
-    private SelenideElement typeIssue = $x("//input[@id='issuetype-field']");
-    private SelenideElement areaTopicTask = $x("//input[@id='summary']");
-    private SelenideElement iframe = $x("//iframe[@id='mce_7_ifr']");
-    private SelenideElement iframeEnvirmentLocator = $x("//iframe[@id='mce_6_ifr' and @class='tox-edit-area__iframe']");
-    private SelenideElement textArea = $x("//body[@id='tinymce' and @contenteditable='true']");
-    private ElementsCollection buttonVisual = $$x("//button[@type='button' and @class='aui-button' and text()='Визуальный']");
-    private SelenideElement buttCreateTask = $x("//input[@id='create-issue-submit' and @value='Создать']");
-    private SelenideElement priorityField = $x("//input[@id='priority-field']");
-    private SelenideElement tagLocator = $x("//textarea[@id='labels-textarea']");
-    private SelenideElement environmentLocator = $x("//textarea[@id='environment']").as("Окружение");
+import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
+
+public class FormTask extends BasePage {
+    private SelenideElement typeIssue = $x("//input[@id='issuetype-field']").as("Тип задачи");
+    private SelenideElement areaTopicTask = $x("//input[@id='summary']").as("Поле \"Тема\"");
+    private SelenideElement iframe = $x("//iframe[@id='mce_7_ifr']").as("Фрейм \"Описание\"");
+    private SelenideElement iframeEnvirmentLocator = $x("//iframe[@id='mce_8_ifr']").as("Фрейм \"Окружение\"");
+    private SelenideElement textArea = $x("//body[@id='tinymce']").as("Текстовое поле");
+    private ElementsCollection buttonVisual = $$x("//button[@type='button' and @class='aui-button' and text()='Визуальный']").as("Кнопка \"Визуальный\"");
+    private SelenideElement buttCreateTask = $x("//input[@id='create-issue-submit' and @value='Создать']").as("Кнопка \"Создать\"");
+    private SelenideElement priorityField = $x("//input[@id='priority-field']").as("Приоритет");
+    private SelenideElement tagLocator = $x("//textarea[@id='labels-textarea']").as("Метки");
     private SelenideElement taskLocator = $x("//textarea[@id='issuelinks-issues-textarea']").as("Задача");
     private SelenideElement buttAssignToMeLocator = $x("//button[@id='assign-to-me-trigger']").as("Выбрать меня исполнителем");
-    private SelenideElement LinkToEpicLocator = $x("//input[@id='customfield_10100-field']").as("Ссылка на эпик");
-    private ElementsCollection affectedVersionsLocator = $$x("//select[@id='versions']//option");
-    private ElementsCollection optionFixVersion = $$x("//select[@id='fixVersions']//option");
-    private SelenideElement relatedTasksLocator = $x("//select[@id='issuelinks-linktype']");
+    private SelenideElement linkToEpicLocator = $x("//input[@id='customfield_10100-field']").as("Ссылка на эпик");
+    private SelenideElement affectedVersionsLocator = $x("//select[@id='versions']").as("Затронутые версии");
+    private SelenideElement optionFixVersion = $x("//select[@id='fixVersions']").as("Исправить в версиях");
+    private SelenideElement relatedTasksLocator = $x("//select[@id='issuelinks-linktype']").as("Связанные задачи");
     private SelenideElement seriousnessLocator = $x("//select[@id='customfield_10400']").as("Серьезность");
     private SelenideElement sprintOptionLocator = $x("//input[@id='customfield_10104-field']").as("Спринт");
-    // private SelenideElement labelLocator = $x("//div[@class='field-group aui-field-versionspicker select-list-renderer']//label[@for='versions']").as("Затронуты версии");
+    private SelenideElement successTaskCreate = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']").as("Тест создан");
 
-    public void selectTypeBug(String typeBug) { // Тип задачи
-        typeIssue.click();
-        typeIssue.clear();
-        typeIssue.setValue(typeBug);
-        typeIssue.pressEnter();
+    public FormTask selectTypeBug(String typeBag) {
+        clickAndSet(typeIssue, typeBag);
+        return this;
     }
 
-    public void setFieldTopicTask(String nameTopic) {  // название темы
-        areaTopicTask.click();
-        areaTopicTask.clear();
-        areaTopicTask.setValue(nameTopic);
+    public FormTask selectPriorityField(String priority) {
+        clickAndSet(priorityField, priority);
+        return this;
     }
 
-    public void setDescriptionTask(String descriptionIssue) { // Описание бага
-        iframe.shouldBe(Condition.visible);
-        switchTo().frame(iframe.toWebElement()); // переключаемся на фрейм
-        textArea.click();
-        textArea.setValue(descriptionIssue);
-        switchTo().defaultContent(); // Возвращаемся на основной контент страницы
+    public FormTask setTag(String tag) {
+        clickAndSet(tagLocator, tag);
+        return this;
     }
 
-    public void selectVisualButtonOnDescriptionTask() { // нажать кнопки "Визуальный"
+    public FormTask setTask(String task) {
+        clickAndSet(taskLocator, task);
+        taskLocator.shouldHave(Condition.attributeMatching("aria-activedescendant", "test-.*"))
+                .pressEnter();
+        return this;
+    }
+
+    public FormTask setSprint(String sprint) {
+        clickAndSet(sprintOptionLocator, sprint);
+        sprintOptionLocator.shouldBe(Condition.visible).sendKeys(Keys.DOWN);
+        sprintOptionLocator.pressTab();
+        return this;
+    }
+
+    public FormTask setLinkToEpic(String linkEpic) {
+        linkToEpicLocator.click();
+        linkToEpicLocator.sendKeys(linkEpic);
+        linkToEpicLocator.shouldBe(Condition.visible).sendKeys(Keys.DOWN);
+        linkToEpicLocator.pressEnter();
+        linkToEpicLocator.pressTab();
+        return this;
+    }
+
+    public FormTask setFieldTopicTask(String nameTopic) {
+        clickAndSet(areaTopicTask, nameTopic);
+        return this;
+    }
+
+
+    public FormTask selectVisualButtonOnDescriptionTask() {
         for (SelenideElement button : buttonVisual) {
             button.click();
         }
+        return this;
     }
 
-    public void setfixVersion(String version) {  // Исправить в версиях
-        SelenideElement element = optionFixVersion.stream()
-                .filter(x -> x.text().equals(version))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Нет такой версии"));
-        element.click();
+    public FormTask setfixVersion(String version) {
+        optionFixVersion.selectOptionContainingText(version);
+        return this;
     }
 
-    public void selectPriorityField(String priority) { // приоритет
-        priorityField.click();
-        priorityField.clear();
-        priorityField.setValue(priority);
+    public FormTask setAffectedVersions(String affectedVersion) {
+        affectedVersionsLocator.selectOptionContainingText(affectedVersion);
+        return this;
     }
 
-    public void setEnvironmentDescription(String environmentDescription) {
-        iframeEnvirmentLocator.shouldBe(Condition.visible);
-        switchTo().frame(iframeEnvirmentLocator.toWebElement()); // переключаемся на фрейм
-        environmentLocator.click();
-        environmentLocator.setValue(environmentDescription);
-        switchTo().defaultContent(); // Возвращаемся на основной контент страницы
+    public FormTask setDescriptionTask(String descriptionIssue) {
+        setValToFrameArea(iframe, textArea, descriptionIssue);
+        return this;
     }
 
-    public void setTag(String tag) { // метки
-        tagLocator.click();
-        tagLocator.clear();
-        tagLocator.setValue(tag);
-        taskLocator.pressTab();
-        switchTo().defaultContent();
+    public FormTask setEnvironmentDescription(String environmentDescription) {
+        setValToFrameArea(iframeEnvirmentLocator, textArea, environmentDescription);
+        return this;
     }
 
-    public void setAffectedVersions(String affectedVersion) { // Затронуты версии
-        SelenideElement element = affectedVersionsLocator.stream()
-                .filter(x -> x.text().equals(affectedVersion))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Нет такой версии"));
-        element.scrollTo().click();
-
+    public FormTask setRelatedTasksLocator(String related) {
+        relatedTasksLocator.selectOptionContainingText(related);
+        return this;
     }
 
-    public void setRelatedTasksLocator() { // Связанные задачи
-        relatedTasksLocator.selectOptionByValue("blocks");  // через switch переделать убрать харкод
-    }
-
-    public void setTask(String task) { // выбраит задачу
-        taskLocator.click();
-        taskLocator.clear();
-        taskLocator.setValue(task);
-        taskLocator.pressTab();
-        switchTo().defaultContent();
-    }
-
-    public void clickButtAssignToMe() { // Исполнитель
+    public FormTask clickButtAssignToMe() {
         buttAssignToMeLocator.click();
+        return this;
     }
 
-    public void setLinkToEpic(String linkEpic) {  // Ссылка на эпик
-        LinkToEpicLocator.click();
-        LinkToEpicLocator.clear();
-        LinkToEpicLocator.setValue(linkEpic);
-        LinkToEpicLocator.pressTab();
-        switchTo().defaultContent();
+    public FormTask setSeriousness(String seriousness) {
+        seriousnessLocator.selectOption(seriousness);
+        seriousnessLocator.pressTab();
+        return this;
     }
 
-    public void setSprint(String sprint) { // ввести
-        sprintOptionLocator.click();
-        sprintOptionLocator.clear();
-        sprintOptionLocator.setValue(sprint);
-        sprintOptionLocator.pressTab();
-    }
-
-    public void setSeriousness(String seriousness) {  // через switch переделать убрать харкод
-        seriousnessLocator.selectOptionByValue("1010");
-        sprintOptionLocator.pressTab();
-        switchTo().defaultContent();
-    }
-
-    public void clickButtCreateNewIssue() {
+    public FormTask clickButtCreateNewIssue() {
         buttCreateTask.click();
+        buttCreateTask.pressEnter();
+        return this;
+    }
+
+    public boolean getStatusTask() {
+        return successTaskCreate.shouldBe(Condition.visible, Duration.ofSeconds(3)).getText().contains("успешно создан");
     }
 }
