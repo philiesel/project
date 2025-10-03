@@ -25,7 +25,7 @@ public class ProjectPage {
     public int parseUpdateCountTaskOnProject(int oldCountTask) {
         Selenide.refresh();
         String taskText = countTaskOnProject.should(Condition.visible)
-                .should(Condition.not(Condition.text(String.valueOf(oldCountTask))), Duration.ofSeconds(3)).text();
+                .should(Condition.not(Condition.text(String.valueOf(oldCountTask))), Duration.ofSeconds(6)).text();
         String countTask = taskText.split(" из ")[1];
         return Integer.parseInt(countTask);
     }

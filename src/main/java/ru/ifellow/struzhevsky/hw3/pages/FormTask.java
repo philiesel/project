@@ -1,6 +1,7 @@
 package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
@@ -13,9 +14,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class FormTask extends BasePage {
     private SelenideElement typeIssue = $x("//input[@id='issuetype-field']").as("Тип задачи");
     private SelenideElement areaTopicTask = $x("//input[@id='summary']").as("Поле \"Тема\"");
-    private SelenideElement iframe = $x("//iframe[@id='mce_7_ifr']").as("Фрейм \"Описание\"");
-    private SelenideElement iframeEnvirmentLocator = $x("//iframe[@id='mce_8_ifr']").as("Фрейм \"Окружение\"");
-    //private SelenideElement iframeEnvirmentLocator = $x("//iframe[@id='mce_21_ifr']']").as("Фрейм \"Окружение\"");
     private SelenideElement textArea = $x("//body[@id='tinymce']").as("Текстовое поле");
     private ElementsCollection buttonVisual = $$x("//button[@type='button' and @class='aui-button' and text()='Визуальный']").as("Кнопка \"Визуальный\"");
     private SelenideElement buttCreateTask = $x("//input[@id='create-issue-submit' and @value='Создать']").as("Кнопка \"Создать\"");
@@ -29,6 +27,7 @@ public class FormTask extends BasePage {
     private SelenideElement seriousnessLocator = $x("//select[@id='customfield_10400']").as("Серьезность");
     private SelenideElement sprintOptionLocator = $x("//input[@id='customfield_10104-field']").as("Спринт");
     private SelenideElement successTaskCreate = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']").as("Тест создан");
+    private ElementsCollection collectionIrames = $$("iframe").as("Коллекция фреймов");
 
     public void selectTypeBug(String typeBag) {
         typeIssue.click();
@@ -87,13 +86,22 @@ public class FormTask extends BasePage {
     }
 
     public FormTask setDescriptionTask(String descriptionIssue) {
-        setValToFrameArea(iframe, textArea, descriptionIssue);
+        SelenideElement iframeEnv = collectionIrames.get(0);
+        iframeEnv.scrollTo();
+        switchTo().frame(iframeEnv);
+        textArea.click();
+        textArea.setValue(descriptionIssue);
+        switchTo().defaultContent();
         return this;
     }
 
     public FormTask setEnvironmentDescription(String environmentDescription) {
-        iframeEnvirmentLocator.scrollTo();
-        setValToFrameArea(iframeEnvirmentLocator, textArea, environmentDescription);
+        SelenideElement iframeEnv = collectionIrames.get(1);
+        iframeEnv.scrollTo();
+        switchTo().frame(iframeEnv);
+        textArea.click();
+        textArea.setValue(environmentDescription);
+        switchTo().defaultContent();
         return this;
     }
 
