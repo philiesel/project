@@ -29,11 +29,12 @@ public class FormTask extends BasePage {
     private SelenideElement successTaskCreate = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']").as("Тест создан");
     private ElementsCollection collectionIrames = $$("iframe").as("Коллекция фреймов");
 
-    public void selectTypeBug(String typeBag) {
+    public FormTask selectTypeBug(String typeBag) {
         typeIssue.click();
         typeIssue.clear();
         typeIssue.click();
         typeIssue.sendKeys(typeBag);
+        return this;
     }
 
     public FormTask selectPriorityField(String priority) {
@@ -41,11 +42,12 @@ public class FormTask extends BasePage {
         return this;
     }
 
-    public void setTag(String tag) {
+    public FormTask setTag(String tag) {
         clickAndSet(tagLocator, tag);
         tagLocator.shouldBe(visible).sendKeys(Keys.DOWN);
         tagLocator.pressEnter();
         switchTo().defaultContent();
+        return this;
     }
 
     public FormTask setTask(String task) {

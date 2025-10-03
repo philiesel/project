@@ -21,23 +21,23 @@ public class NewBugWithDescription extends BaseTest {
     public void createNewBugWithDescription() {
         loginPage.auth(BaseTest.username, BaseTest.password);
         dashboardPage.goToProjectTest();
-        projectPage.clickMenuTask();
-        projectPage.clickButtNewTask();
-        formTask.selectVisualButtonOnDescriptionTask();
-        formTask.selectTypeBug(TestData.TYPE_BUG);
-        formTask.setFieldTopicTask(TestData.TOPIC_BUG);
-        formTask.setDescriptionTask(TestData.DESCRIPTION_TASK);
-        formTask.setfixVersion(TestData.FIX_VERSION);
-        formTask.selectPriorityField(TestData.PRIORITY);
-        formTask.setTag(TestData.TAG);
-        formTask.setEnvironmentDescription(TestData.ENVIRONMENT_DESCRIPTION);
-        formTask.setAffectedVersions(TestData.AFFECTED_VERSION);
-        formTask.setRelatedTasksLocator(TestData.RELATED_TASK);
-        formTask.setTask(TestData.TASK);
-        formTask.clickButtAssignToMe();
-        formTask.setSprint(TestData.SPRINT);
-        formTask.setSeriousness(TestData.SERIOUSNESS);
-        formTask.clickButtCreateNewIssue();
+        projectPage.clickMenuTask()
+                .clickButtNewTask();
+        formTask.selectVisualButtonOnDescriptionTask()
+                .selectTypeBug(TestData.TYPE_BUG)
+                .setFieldTopicTask(TestData.TOPIC_BUG)
+                .setDescriptionTask(TestData.DESCRIPTION_TASK)
+                .setfixVersion(TestData.FIX_VERSION)
+                .selectPriorityField(TestData.PRIORITY)
+                .setTag(TestData.TAG)
+                .setEnvironmentDescription(TestData.ENVIRONMENT_DESCRIPTION)
+                .setAffectedVersions(TestData.AFFECTED_VERSION)
+                .setRelatedTasksLocator(TestData.RELATED_TASK)
+                .setTask(TestData.TASK)
+                .clickButtAssignToMe()
+                .setSprint(TestData.SPRINT)
+                .setSeriousness(TestData.SERIOUSNESS)
+                .clickButtCreateNewIssue();
         assertTrue(formTask.getStatusTask(), "Задача не была создана!");
     }
 }

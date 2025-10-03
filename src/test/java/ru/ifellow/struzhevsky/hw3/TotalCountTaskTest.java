@@ -24,9 +24,9 @@ public class TotalCountTaskTest extends BaseTest {
         projectPage.clickMenuTask();
         int countTask = projectPage.parsCountTaskOnProject();
         projectPage.clickButtNewTask();
-        formTask.selectTypeBug(TestData.TYPE_BUG_ISSUE);
-        formTask.setFieldTopicTask(TestData.DESCRIPTION_TASK);
-        formTask.clickButtCreateNewIssue();
+        formTask.selectTypeBug(TestData.TYPE_BUG_ISSUE)
+                .setFieldTopicTask(TestData.DESCRIPTION_TASK)
+                .clickButtCreateNewIssue();
         int updateCountTask = projectPage.parseUpdateCountTaskOnProject(countTask);
         assertTrue(updateCountTask > countTask, "Ожидалось, что количество задач увеличится, но оно не увеличилось");
     }

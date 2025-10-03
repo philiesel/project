@@ -21,11 +21,11 @@ public class TaskTest extends BaseTest {
     public void checkStatusAndVersionTask() {
         loginPage.auth(BaseTest.username, BaseTest.password);
         dashboardPage.goToProjectTest();
-        projectPage.clickMenuTask();
-        projectPage.clickLinkAllTask();
+        projectPage.clickMenuTask()
+                .clickLinkAllTask();
         String oldNameTest = taskPage.getNameTest();
-        taskPage.findTask(TestData.FIND_TASK);
-        taskPage.checkChangeName(oldNameTest);
+        taskPage.findTask(TestData.FIND_TASK)
+                .checkChangeName(oldNameTest);
         assertEquals(TestData.FIND_TASK, taskPage.getNameTest());
         assertEquals(TestData.STATUS_TASK.toUpperCase(), taskPage.checkStatus());
         assertEquals(TestData.VERSION_TASK, taskPage.checkVersion());

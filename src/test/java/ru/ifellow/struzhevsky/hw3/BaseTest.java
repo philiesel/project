@@ -1,6 +1,8 @@
 package ru.ifellow.struzhevsky.hw3;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import ru.ifellow.struzhevsky.hw3.utils.ServiceData;
@@ -26,8 +28,15 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        Selenide.clearBrowserCookies();
         open(url);
         getWebDriver().manage().window().maximize();
+        Configuration.pageLoadStrategy = "eager";
+    }
+
+    @AfterEach
+    public void reset() {
+        Selenide.clearBrowserCookies();
+        Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();
     }
 }

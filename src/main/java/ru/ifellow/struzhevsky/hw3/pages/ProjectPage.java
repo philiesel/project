@@ -30,8 +30,9 @@ public class ProjectPage {
         return Integer.parseInt(countTask);
     }
 
-    public void clickMenuTask() {
+    public ProjectPage clickMenuTask() {
         buttonTask.shouldBe(Condition.visible).click();
+        return this;
     }
 
     public void clickLinkAllTask() {
