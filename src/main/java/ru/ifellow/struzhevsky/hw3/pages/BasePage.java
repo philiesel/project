@@ -12,10 +12,10 @@ public class BasePage {
         element.sendKeys(value);
     }
 
-    protected void setValToFrameArea(SelenideElement frame, SelenideElement area, String value) {
-        frame.scrollTo();
-        frame.shouldBe(Condition.visible);
-        switchTo().frame(frame.toWebElement());
+    protected void setValToFrameArea(SelenideElement frames, SelenideElement area, String value) {
+        frames.scrollTo();
+        frames.shouldBe(Condition.visible);
+        switchTo().frame(frames);
         area.click();
         area.setValue(value);
         switchTo().defaultContent();

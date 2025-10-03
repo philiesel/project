@@ -24,7 +24,7 @@ public class NewBugWithDescription extends BaseTest {
         projectPage.clickMenuTask();
         projectPage.clickButtNewTask();
         formTask.selectVisualButtonOnDescriptionTask();
-        formTask.selectTypeBug(TestData.TYPE_BUG);  // переделка
+        formTask.selectTypeBug(TestData.TYPE_BUG);
         formTask.setFieldTopicTask(TestData.TOPIC_BUG);
         formTask.setDescriptionTask(TestData.DESCRIPTION_TASK);
         formTask.setfixVersion(TestData.FIX_VERSION);
@@ -35,7 +35,6 @@ public class NewBugWithDescription extends BaseTest {
         formTask.setRelatedTasksLocator(TestData.RELATED_TASK);
         formTask.setTask(TestData.TASK);
         formTask.clickButtAssignToMe();
-        formTask.setLinkToEpic(TestData.EPIC);
         formTask.setSprint(TestData.SPRINT);
         formTask.setSeriousness(TestData.SERIOUSNESS);
         formTask.clickButtCreateNewIssue();
