@@ -20,4 +20,5 @@ public class TestData {
     public static final String STATUS_TASK = "Сделать";
     public static final String HEADER_AUTH = "Вход в систему";
     public static final String PROFILE_TITLE = "Сводка";
+    public static final String HEADER_DASHBOARD = "System Dashboard";
 }

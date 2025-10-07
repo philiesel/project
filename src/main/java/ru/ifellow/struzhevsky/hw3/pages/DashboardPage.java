@@ -12,6 +12,7 @@ public class DashboardPage {
     private final SelenideElement linkProfileLocator = $x("//a[@id='view_profile']").as("Меню \"Профиль\"");
     private final SelenideElement menuProject = $x("//a[@id='browse_link']").as("Меню \"Проекты\"");
     private final SelenideElement linkProjectTest = $x("//a[@id='admin_main_proj_link_lnk']").as("Меню проект \"Test\"");
+    private final SelenideElement headerDashboard = $x("//div[@class='aui-page-header-main']/h1[text()='System Dashboard']");
 
     public ProfilePage goToProfile() {
         buttonProfileLocator.click();
@@ -23,5 +24,9 @@ public class DashboardPage {
         menuProject.shouldBe(Condition.visible).click();
         linkProjectTest.click();
         return page(ProjectPage.class);
+    }
+
+    public String getHeaderDashboard() {
+        return headerDashboard.text();
     }
 }
