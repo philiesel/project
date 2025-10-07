@@ -13,7 +13,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <!-- TODO ????  -->
         <configurationParameters>
             cucumber.junit-platform.naming-strategy=long
         </configurationParameters>
