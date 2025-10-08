@@ -1,102 +1,19 @@
 package hw4.io.cucumber.steps;
 
-import hw4.io.cucumber.hooks.Hooks;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.То;
-import io.cucumber.java.ru.Тогда;
-import org.junit.jupiter.api.Assertions;
-import ru.ifellow.struzhevsky.hw3.pages.*;
+import ru.ifellow.struzhevsky.hw3.pages.FormTask;
+import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
 import ru.ifellow.struzhevsky.hw3.utils.TestData;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StepDefinitions {
-    private final LoginPage loginPage = new LoginPage();
-    private DashboardPage dashboard = new DashboardPage();
-    private ProfilePage profile = new ProfilePage();
-    private final DashboardPage dashboardPage = new DashboardPage();
     private final ProjectPage projectPage = new ProjectPage();
-    private TaskPage taskPage = new TaskPage();
-    private FormTask formTask = new FormTask();
+    private final FormTask formTask = new FormTask();
     private int countTask;
     private int updateCountTask;
-    protected static String username = Hooks.username;
-    protected static String password = Hooks.password;
-
-    @Когда("есть на странице авторизации заголовок {string}")
-    public void checkAuthHeader(String header) {
-        assertEquals(header, loginPage.getHeaderAuthorization());
-    }
-
-    @Тогда("я ввожу логин и пароль")
-    public void setCredentials() {
-        loginPage.auth(username, password);
-    }
-
-    @То("я успешно авторизуюсь и перехожу на главную страницу")
-    public void goToDashboard() {
-        assertEquals(TestData.HEADER_DASHBOARD, dashboard.getHeaderDashboard());
-    }
-
-    @Тогда("я перехожу в мой профиль")
-    public void goToProfile() {
-        profile = dashboard.goToProfile();
-    }
-
-    @И("в заголовоке профиля отображается {string}")
-    public void getTitleProfile(String header) {
-        assertEquals(header, profile.getProfileTitle());
-    }
-
-    @И("имя пользователя в профиле соответствует моему логину")
-    public void checkNameProfile() {
-        Assertions.assertEquals(username, profile.getProfileName());
-    }
-
-    @Тогда("я перехожу на страницу проекта")
-    public void goToProjectTest() {
-        dashboardPage.goToProjectTest();
-    }
-
-    @И("я кликаю на аватар")
-    public void clickAvatar() {
-        projectPage.clickButtAvatar();
-    }
-
-    @То("значение мета-данных проекта должно быть {string}")
-    public void checkMetaData(String nameProject) {
-        assertEquals(nameProject, projectPage.getMetaValueProject());
-    }
-
-    @И("я перехожу в раздел задач")
-    public void clickAllTask() {
-        projectPage.clickMenuTask()
-                .clickLinkAllTask();
-    }
-
-    @И("я нахожу задачу с названием {string}")
-    public void findTask(String arg0) {
-        String oldNameTest = taskPage.getNameTest();
-        taskPage.findTask(arg0)
-                .checkChangeName(oldNameTest);
-    }
-
-    @Тогда("название задачи должно быть равно {string}")
-    public void checNameTask(String arg0) {
-        assertEquals(TestData.FIND_TASK, taskPage.getNameTest());
-    }
-
-    @И("статус задачи должен быть {string}")
-    public void checkStatus(String arg0) {
-        assertEquals(arg0.toUpperCase(), taskPage.checkStatus());
-    }
-
-    @И("версия задачи должна быть {string}")
-    public void checkVersionTask(String arg0) {
-        assertEquals(arg0, taskPage.checkVersion());
-    }
 
     @И("я сохраняю текущее количество задач")
     public void saveCurrentCountTask() {
