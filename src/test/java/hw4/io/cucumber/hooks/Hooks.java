@@ -26,14 +26,14 @@ public class Hooks {
         url = properties.getProperty("url");
     }
 
-    @Before
+    @Before("@tag")
     public void setUp() {
         open(url);
         getWebDriver().manage().window().maximize();
         Configuration.pageLoadStrategy = "eager";
     }
 
-    @After
+    @After("@tag")
     public void reset() {
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();

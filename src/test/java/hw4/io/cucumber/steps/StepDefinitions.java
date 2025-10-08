@@ -1,23 +1,14 @@
 package hw4.io.cucumber.steps;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
+import hw4.io.cucumber.hooks.Hooks;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.То;
 import io.cucumber.java.ru.Тогда;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import ru.ifellow.struzhevsky.hw3.pages.*;
-import ru.ifellow.struzhevsky.hw3.utils.ServiceData;
 import ru.ifellow.struzhevsky.hw3.utils.TestData;
 
-import java.util.Properties;
-
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,26 +22,8 @@ public class StepDefinitions {
     private FormTask formTask = new FormTask();
     private int countTask;
     private int updateCountTask;
-    protected static Properties properties;
-    protected static String username;
-    protected static String password;
-    protected static String url;
-
-    @BeforeAll
-    public static void beforeAllTests() {
-        properties = ServiceData.getDataOnFile();
-        username = properties.getProperty("username");
-        password = properties.getProperty("password");
-        url = properties.getProperty("url");
-    }
-
-    @Before
-    public void setUp() {
-        open(url);
-        getWebDriver().manage().window().maximize();
-        Configuration.pageLoadStrategy = "eager";
-    }
-
+    protected static String username = Hooks.username;
+    protected static String password = Hooks.password;
 
     @Когда("есть на странице авторизации заголовок {string}")
     public void checkAuthHeader(String header) {
@@ -143,14 +116,6 @@ public class StepDefinitions {
     public void количествоЗадачДолжноУвеличитьсяНа() {
         assertTrue(updateCountTask > countTask, "Ожидалось, что количество задач увеличится, но оно не увеличилось");
     }
-
-    @AfterEach
-    public void close() {
-        Selenide.clearBrowserCookies();
-        Selenide.clearBrowserLocalStorage();
-        Selenide.closeWebDriver();
-    }
-
 
     @И("я создаю новый баг с описанием")
     public void яСоздаюНовыйБагСОписанием() {
