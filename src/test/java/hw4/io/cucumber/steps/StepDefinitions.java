@@ -31,80 +31,80 @@ public class StepDefinitions {
     }
 
     @Тогда("я ввожу логин и пароль")
-    public void яВвожуЛогинИПароль() {
+    public void setCredentials() {
         loginPage.auth(username, password);
     }
 
     @То("я успешно авторизуюсь и перехожу на главную страницу")
-    public void яУспешноАвторизуюсьИПерехожуНаГлавнуюСтраницу() {
+    public void goToDashboard() {
         assertEquals(TestData.HEADER_DASHBOARD, dashboard.getHeaderDashboard());
     }
 
     @Тогда("я перехожу в мой профиль")
-    public void яПерехожуВМойПрофиль() {
+    public void goToProfile() {
         profile = dashboard.goToProfile();
     }
 
     @И("в заголовоке профиля отображается {string}")
-    public void вЗаголовокеПрофиляОтображается(String header) {
+    public void getTitleProfile(String header) {
         assertEquals(header, profile.getProfileTitle());
     }
 
     @И("имя пользователя в профиле соответствует моему логину")
-    public void имяПользователяВПрофилеСоответствуетМоемуЛогину() {
+    public void checkNameProfile() {
         Assertions.assertEquals(username, profile.getProfileName());
     }
 
     @Тогда("я перехожу на страницу проекта")
-    public void яПерехожуНаСтраницуПроекта() {
+    public void goToProjectTest() {
         dashboardPage.goToProjectTest();
     }
 
     @И("я кликаю на аватар")
-    public void яКликаюНаАватар() {
+    public void clickAvatar() {
         projectPage.clickButtAvatar();
     }
 
     @То("значение мета-данных проекта должно быть {string}")
-    public void значениеМетаДанныхПроектаДолжноБыть(String nameProject) {
+    public void checkMetaData(String nameProject) {
         assertEquals(nameProject, projectPage.getMetaValueProject());
     }
 
     @И("я перехожу в раздел задач")
-    public void яПерехожуВРазделЗадач() {
+    public void clickAllTask() {
         projectPage.clickMenuTask()
                 .clickLinkAllTask();
     }
 
     @И("я нахожу задачу с названием {string}")
-    public void яНахожуЗадачуСНазванием(String arg0) {
+    public void findTask(String arg0) {
         String oldNameTest = taskPage.getNameTest();
         taskPage.findTask(arg0)
                 .checkChangeName(oldNameTest);
     }
 
     @Тогда("название задачи должно быть равно {string}")
-    public void названиеЗадачиДолжноБытьРавно(String arg0) {
+    public void checNameTask(String arg0) {
         assertEquals(TestData.FIND_TASK, taskPage.getNameTest());
     }
 
     @И("статус задачи должен быть {string}")
-    public void статусЗадачиДолженБыть(String arg0) {
+    public void checkStatus(String arg0) {
         assertEquals(arg0.toUpperCase(), taskPage.checkStatus());
     }
 
     @И("версия задачи должна быть {string}")
-    public void версияЗадачиДолжнаБыть(String arg0) {
+    public void checkVersionTask(String arg0) {
         assertEquals(arg0, taskPage.checkVersion());
     }
 
     @И("я сохраняю текущее количество задач")
-    public void яСохраняюТекущееКоличествоЗадач() {
+    public void saveCurrentCountTask() {
         countTask = projectPage.parsCountTaskOnProject();
     }
 
     @Когда("я создаю новую задачу с типом {string} и темой {string}")
-    public void яСоздаюНовуюЗадачуСТипомИТемой(String arg0, String arg1) {
+    public void createNewTask(String arg0, String arg1) {
         projectPage.clickButtNewTask();
         formTask.selectTypeBug(arg0)
                 .setFieldTopicTask(arg1)
@@ -113,12 +113,12 @@ public class StepDefinitions {
     }
 
     @То("количество задач должно увеличиться")
-    public void количествоЗадачДолжноУвеличитьсяНа() {
+    public void checkCountTask() {
         assertTrue(updateCountTask > countTask, "Ожидалось, что количество задач увеличится, но оно не увеличилось");
     }
 
     @И("я создаю новый баг с описанием")
-    public void яСоздаюНовыйБагСОписанием() {
+    public void createNewBugWithDescription() {
         projectPage.clickMenuTask()
                 .clickButtNewTask();
         formTask.selectVisualButtonOnDescriptionTask()
@@ -139,7 +139,7 @@ public class StepDefinitions {
     }
 
     @То("задача с описанием должна быть успешно создана")
-    public void задачаСОписаниемДолжнаБытьУспешноСоздана() {
+    public void checkCreateNewTask() {
         assertTrue(formTask.getStatusTask(), "Задача не была создана!");
     }
 }
