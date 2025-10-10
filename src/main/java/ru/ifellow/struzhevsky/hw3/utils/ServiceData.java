@@ -11,7 +11,7 @@ public class ServiceData {
     public static Properties getDataOnFile() {
         Properties properties = new Properties();
         try {
-            fileInputStream = new FileInputStream(pathConfig);   //вынести в отдельный класс
+            fileInputStream = new FileInputStream(pathConfig);
             properties.load(fileInputStream);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
