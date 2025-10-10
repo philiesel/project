@@ -1,4 +1,4 @@
-package hw4.io.cucumber.steps;
+package hw4.io.cucumber.stepDefinitions;
 
 import hw4.io.cucumber.hooks.Hooks;
 import io.cucumber.java.ru.И;
