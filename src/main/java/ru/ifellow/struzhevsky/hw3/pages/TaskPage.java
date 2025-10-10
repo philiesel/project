@@ -39,5 +39,4 @@ public class TaskPage {
     public String getNameTest() {
         return nameFindTask.shouldBe(Condition.visible).getText();
     }
-
 }
