@@ -18,16 +18,10 @@ public class SpecifactionsAuth {
                 .build();
     }
 
-    public static ResponseSpecification authSuccessResponseSpec() {
+    public static ResponseSpecification authResponseSpec(int statusCode) {
         return new ResponseSpecBuilder()
                 .log(BODY)
-                .expectStatusCode(200)
-                .build();
-    }
-    public static ResponseSpecification authUnsuccessResponseSpec() {
-        return new ResponseSpecBuilder()
-                .log(BODY)
-                .expectStatusCode(401)
+                .expectStatusCode(statusCode)
                 .build();
     }
 }

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ru.ifellow.struzhevsky.hw5.exercise3.utils.ConfigurationFile.getProperty;
+import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProperty;
 
 public class CredentialsUser {
     private final File file = new File(getProperty("pathCredentials"));

@@ -7,36 +7,37 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
-import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.*;
-import static ru.ifellow.struzhevsky.hw5.exercise3.utils.ConfigurationFile.getProperty;
+import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProperty;
+import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.authRequestSpec;
+import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.authResponseSpec;
 
 public class AuthorizationUser {
     private CredentialsUser credentialsUser = new CredentialsUser();
 
-    public Response unsuccessLoginAuth() {
+    public AuthorizationUser unsuccessLoginAuth() {
         Map<String, String> data = credentialsUser.changeLogin(getProperty("fakeName"));
-        return given()
+        given()
                 .spec(authRequestSpec())
                 .body(data)
                 .when()
                 .post("/login")
                 .then()
-                .spec(authUnsuccessResponseSpec())
-                .body(containsString("not found"))
-                .extract().response();
+                .spec(authResponseSpec(401))
+                .body(containsString("not found"));
+        return this;
     }
 
-    public Response unsuccessPassAuth() {
+    public AuthorizationUser unsuccessPassAuth() {
         Map<String, String> data = credentialsUser.changePass(getProperty("fakePass"));
-        return given()
+        given()
                 .spec(authRequestSpec())
                 .body(data)
                 .when()
                 .post("/login")
                 .then()
-                .spec(authUnsuccessResponseSpec())
-                .body(containsString("not right pass"))
-                .extract().response();
+                .spec(authResponseSpec(401))
+                .body(containsString("not right pass"));
+        return this;
     }
 
     public String successCredentialsAuth() {
@@ -47,7 +48,7 @@ public class AuthorizationUser {
                 .when()
                 .post("/login")
                 .then()
-                .spec(authSuccessResponseSpec())
+                .spec(authResponseSpec(200))
                 .body(containsString("token :"))
                 .log().body()
                 .extract().response();
