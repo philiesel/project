@@ -8,47 +8,47 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProperty;
-import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.authRequestSpec;
-import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.authResponseSpec;
+import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.requestSpec;
+import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.responseSpec;
 
 public class AuthorizationUser {
     private CredentialsUser credentialsUser = new CredentialsUser();
 
-    public AuthorizationUser unsuccessLoginAuth() {
-        Map<String, String> data = credentialsUser.changeLogin(getProperty("fakeName"));
+    private AuthorizationUser unsuccessAuth(String field, String expectedErrorMessage) {
+        Map<String, String> data;
+        if ("fakeName".equals(field)) {
+            data = credentialsUser.changeLogin(getProperty(field));
+        } else {
+            data = credentialsUser.changePass(getProperty("fakePass"));
+        }
         given()
-                .spec(authRequestSpec())
+                .spec(requestSpec())
                 .body(data)
                 .when()
                 .post("/login")
                 .then()
-                .spec(authResponseSpec(401))
-                .body(containsString("not found"));
+                .spec(responseSpec(401))
+                .body(containsString(expectedErrorMessage));
         return this;
     }
 
+    public AuthorizationUser unsuccessLoginAuth() {
+        return unsuccessAuth("fakeName", "not found");
+    }
+
     public AuthorizationUser unsuccessPassAuth() {
-        Map<String, String> data = credentialsUser.changePass(getProperty("fakePass"));
-        given()
-                .spec(authRequestSpec())
-                .body(data)
-                .when()
-                .post("/login")
-                .then()
-                .spec(authResponseSpec(401))
-                .body(containsString("not right pass"));
-        return this;
+        return unsuccessAuth("fakePass", "not right pass");
     }
 
     public String successCredentialsAuth() {
         Map<String, String> data = credentialsUser.getCredentials();
         Response response = given()
-                .spec(authRequestSpec())
+                .spec(requestSpec())
                 .body(data)
                 .when()
                 .post("/login")
                 .then()
-                .spec(authResponseSpec(200))
+                .spec(responseSpec(200))
                 .body(containsString("token :"))
                 .log().body()
                 .extract().response();

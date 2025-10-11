@@ -10,7 +10,7 @@ import static io.restassured.filter.log.LogDetail.BODY;
 import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProperty;
 
 public class SpecifactionsAuth {
-    public static RequestSpecification authRequestSpec() {
+    public static RequestSpecification requestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(getProperty("baseLocalSpringUrl"))
                 .setContentType(ContentType.JSON)
@@ -18,7 +18,7 @@ public class SpecifactionsAuth {
                 .build();
     }
 
-    public static ResponseSpecification authResponseSpec(int statusCode) {
+    public static ResponseSpecification responseSpec(int statusCode) {
         return new ResponseSpecBuilder()
                 .log(BODY)
                 .expectStatusCode(statusCode)
