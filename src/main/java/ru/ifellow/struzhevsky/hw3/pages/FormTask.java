@@ -1,8 +1,8 @@
 package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
@@ -29,6 +29,7 @@ public class FormTask extends BasePage {
     private SelenideElement successTaskCreate = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']").as("Тест создан");
     private ElementsCollection collectionIrames = $$("iframe").as("Коллекция фреймов");
 
+    @Step("Выбор типа задачи: {typeBag}")
     public FormTask selectTypeBug(String typeBag) {
         typeIssue.click();
         typeIssue.clear();
@@ -37,11 +38,13 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Выбор приоритета задачи: {priority}")
     public FormTask selectPriorityField(String priority) {
         clickAndSet(priorityField, priority);
         return this;
     }
 
+    @Step("Установка тега: {tag}")
     public FormTask setTag(String tag) {
         clickAndSet(tagLocator, tag);
         tagLocator.shouldBe(visible).sendKeys(Keys.DOWN);
@@ -50,6 +53,7 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Выбор задачи: {task}")
     public FormTask setTask(String task) {
         clickAndSet(taskLocator, task);
         taskLocator.shouldHave(attributeMatching("aria-activedescendant", "test-.*"))
@@ -57,6 +61,7 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Выбор спринта: {sprint}")
     public FormTask setSprint(String sprint) {
         clickAndSet(sprintOptionLocator, sprint);
         sprintOptionLocator.shouldBe(visible).sendKeys(Keys.DOWN);
@@ -64,12 +69,13 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Заполнение темы задачи: {nameTopic}")
     public FormTask setFieldTopicTask(String nameTopic) {
         clickAndSet(areaTopicTask, nameTopic);
         return this;
     }
 
-
+    @Step("Активация кнопок \"Визуальный\" описания задачи")
     public FormTask selectVisualButtonOnDescriptionTask() {
         for (SelenideElement button : buttonVisual) {
             button.click();
@@ -77,16 +83,19 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Установка версии исправления: {version}")
     public FormTask setfixVersion(String version) {
         optionFixVersion.selectOptionContainingText(version);
         return this;
     }
 
+    @Step("Установка затронутой версии: {affectedVersion}")
     public FormTask setAffectedVersions(String affectedVersion) {
         affectedVersionsLocator.selectOptionContainingText(affectedVersion);
         return this;
     }
 
+    @Step("Ввод описания задачи")
     public FormTask setDescriptionTask(String descriptionIssue) {
         SelenideElement iframeEnv = collectionIrames.get(0);
         iframeEnv.scrollTo();
@@ -97,6 +106,7 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Ввод описания окружения")
     public FormTask setEnvironmentDescription(String environmentDescription) {
         SelenideElement iframeEnv = collectionIrames.get(1);
         iframeEnv.scrollTo();
@@ -107,27 +117,32 @@ public class FormTask extends BasePage {
         return this;
     }
 
+    @Step("Указание связанных задач: {related}")
     public FormTask setRelatedTasksLocator(String related) {
         relatedTasksLocator.selectOptionContainingText(related);
         return this;
     }
 
+    @Step("Назначить задачу на себя")
     public FormTask clickButtAssignToMe() {
         buttAssignToMeLocator.click();
         return this;
     }
 
+    @Step("Установка степени серьёзности: {seriousness}")
     public FormTask setSeriousness(String seriousness) {
         seriousnessLocator.selectOption(seriousness);
         seriousnessLocator.pressTab();
         return this;
     }
 
+    @Step("Нажать кнопку 'Создать задачу'")
     public FormTask clickButtCreateNewIssue() {
         buttCreateTask.click();
         return this;
     }
 
+    @Step("Проверка статуса создания задачи")
     public boolean getStatusTask() {
         return successTaskCreate.shouldBe(visible, Duration.ofSeconds(6)).getText().contains("успешно создан");
     }

@@ -2,6 +2,8 @@ package ru.ifellow.struzhevsky.hw3;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +26,10 @@ public abstract class BaseTest {
         username = properties.getProperty("username");
         password = properties.getProperty("password");
         url = properties.getProperty("url");
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+        );
     }
 
     @BeforeEach

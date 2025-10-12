@@ -2,6 +2,7 @@ package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
@@ -14,6 +15,7 @@ public class TaskPage {
     private final SelenideElement statusVersion = $x("//span[@id='fixVersions-field']").as("Версия задачи");
     private final SelenideElement nameFindTask = $x("//h1[@id='summary-val']").as("Название задачи");
 
+    @Step("Поиск задачи по имени: {nameTask}")
     public TaskPage findTask(String nameTask) {
         areaFindTask.click();
         areaFindTask.clear();
@@ -22,20 +24,23 @@ public class TaskPage {
         return this;
     }
 
+    @Step("Проверка изменения названия задачи {oldTask} - старое значение")
     public String checkChangeName(String oldTask) {
         return nameFindTask.should(Condition.visible)
                 .should(Condition.not(Condition.text(String.valueOf(oldTask))), Duration.ofSeconds(3)).text();
-
     }
 
+    @Step("Получение статуса задачи")
     public String checkStatus() {
         return statusTask.getText();
     }
 
+    @Step("Получение версии задачи")
     public String checkVersion() {
         return statusVersion.getText();
     }
 
+    @Step("Получение имени задачи")
     public String getNameTest() {
         return nameFindTask.shouldBe(Condition.visible).getText();
     }

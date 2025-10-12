@@ -1,6 +1,7 @@
 package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
@@ -11,16 +12,19 @@ public class LoginPage extends BasePage {
     private final SelenideElement loginButtonLocator = $x("//input[@name='login' and @value='Войти']").as("Кнопка войти");
     private final SelenideElement headerAuthorizationLocator = $x("//h3[@id='gadget-0-title']").as("Заголовок входа в систему");
 
+    @Step("Ввод логина: {username}")
     private LoginPage enterUsername(String username) {
         clickAndSet(usernameFieldLocator, username);
         return this;
     }
 
+    @Step("Ввод пароля: {password}")
     private LoginPage enterPassword(String password) {
         clickAndSet(passwordFieldLocator, password);
         return this;
     }
 
+    @Step("Авторизация пользователем: {username} {password}")
     public DashboardPage auth(String username, String password) {
         enterUsername(username);
         enterPassword(password);
@@ -28,6 +32,7 @@ public class LoginPage extends BasePage {
         return page(DashboardPage.class);
     }
 
+    @Step("Получение заголовка авторизации")
     public String getHeaderAuthorization() {
         return headerAuthorizationLocator.text();
     }
