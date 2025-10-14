@@ -4,5 +4,4 @@ target/
 /src/test/resources/chromedriver.exe
 /src/test/resources/config.properties
 .allure
-.mvn
 mvnw
