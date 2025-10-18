@@ -1,5 +1,7 @@
 package ru.ifellow.struzhevsky.hw5.exercise3.steps;
 
+import io.cucumber.java.ru.Когда;
+import io.cucumber.java.ru.Тогда;
 import io.restassured.response.Response;
 import ru.ifellow.struzhevsky.hw5.exercise3.utils.CredentialsUser;
 
@@ -32,14 +34,17 @@ public class AuthorizationUser {
         return this;
     }
 
+    @Тогда("пытаюсь войти с неправильными логином")
     public AuthorizationUser unsuccessLoginAuth() {
         return unsuccessAuth("fakeName", "not found");
     }
 
+    @Тогда("пытаюсь войти с неправильными паролем")
     public AuthorizationUser unsuccessPassAuth() {
         return unsuccessAuth("fakePass", "not right pass");
     }
 
+    @Когда("вхожу с правильными учетными данными получив токен")
     public String successCredentialsAuth() {
         Map<String, String> data = credentialsUser.getCredentials();
         Response response = given()
