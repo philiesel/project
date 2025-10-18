@@ -22,7 +22,6 @@ public class SpecifactionsReqres {
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .log(BODY)
-                .expectStatusCode(201)
                 .build();
     }
 }

@@ -10,7 +10,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class UserApiReqres {
     public ValidatableResponse createUserWithJson(Map<String, String> data) {
-        System.out.println();
         return given()
                 .spec(SpecifactionsReqres.getRequestSpec(getProperty("baseUriReqres")))
                 .body(data)

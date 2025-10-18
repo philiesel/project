@@ -5,7 +5,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import ru.ifellow.struzhevsky.hw5.exercise1.utils.Configuration;
+import ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration;
 
 import static io.restassured.filter.log.LogDetail.BODY;
 
