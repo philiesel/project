@@ -11,13 +11,14 @@ import static io.restassured.filter.log.LogDetail.BODY;
 
 public class SpecifactionsRickAndMorty {
     private static final String BASE_URI = Configuration.getProperty("baseUriRickAndMorty");
-    private static String сharacterResources = "/character/";
+    private static String сharacterResources = "/character";
 
     public static RequestSpecification getCharacterReqestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setBasePath(сharacterResources)
                 .setContentType(ContentType.JSON)
+                .log(BODY)
                 .build();
     }
 

@@ -26,5 +26,4 @@ public class BaseApi {
                 .spec(SpecifactionsRickAndMorty.getResponseSpec())
                 .extract().response();
     }
-
 }
