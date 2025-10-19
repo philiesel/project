@@ -8,6 +8,6 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @IncludeEngines("cucumber")
 @SelectPackages("ru.ifellow.struzhevsky.hw5")
-@ConfigurationParametersResource("cucumber.properties")
+@ConfigurationParametersResource("classpath:cucumber.properties")
 public class RunCucumberTest {
 }
