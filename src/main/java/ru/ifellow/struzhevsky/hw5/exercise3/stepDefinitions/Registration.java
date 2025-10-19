@@ -1,6 +1,7 @@
-package ru.ifellow.struzhevsky.hw5.exercise3.steps;
+package ru.ifellow.struzhevsky.hw5.exercise3.stepDefinitions;
 
 import io.cucumber.java.ru.Когда;
+import io.qameta.allure.Step;
 
 import java.io.File;
 
@@ -12,6 +13,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.respons
 public class Registration {
     private final File jsonFile = new File(getProperty("pathCredentials"));
 
+    @Step("Регистрация нового пользователя")
     @Когда("зарегистрировал нового пользователя")
     public AuthorizationUser successRegistration() {
         given()

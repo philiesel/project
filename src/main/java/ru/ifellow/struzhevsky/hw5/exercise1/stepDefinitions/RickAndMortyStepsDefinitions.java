@@ -4,6 +4,7 @@ import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import ru.ifellow.struzhevsky.hw5.exercise1.api.BaseApi;
 import ru.ifellow.struzhevsky.hw5.exercise1.dto.CharacterDto;
@@ -21,12 +22,14 @@ public class RickAndMortyStepsDefinitions {
     private EpisodeDto lastEpisode;
     private CharacterDto lastCharacter;
 
+    @Step("Поиск персонажа Морти Смит")
     @Когда("нашел информацию по персонажу Морти Смит")
     public void getInfoMorty() {
         Response response = baseApi.getCharacterByName(getProperty("characterName"));
         mortyResult = response.jsonPath().getObject("", ResultDto.class);
     }
 
+    @Step("Получение последнего эпизода с участием Морти Смит")
     @И("получил последний эпизод, где появляется Морти Смит")
     public void getLastEpisodeOfMorty() {
         String lastEpisodeUrl = utils.getLastEpisode(mortyResult);
@@ -34,6 +37,7 @@ public class RickAndMortyStepsDefinitions {
         lastEpisode = episodeResponse.jsonPath().getObject("", EpisodeDto.class);
     }
 
+    @Step("Последний персонаж из эпизода")
     @Тогда("я получил последнего персонажа из этого эпизода")
     public void getLastCharacterInEpisode() {
         String lastCharacterUrl = utils.getLastCharacters(lastEpisode);
@@ -41,6 +45,7 @@ public class RickAndMortyStepsDefinitions {
         lastCharacter = characterResponse.jsonPath().getObject("", CharacterDto.class);
     }
 
+    @Step("Проверяю место нахождение и рассу последнего персонажа с Морти")
     @Затем("я сверяю нахождение и рассу персонажа с данными Морти Смита")
     public void checkSameSpeciesAndLocation() {
         CharacterDto morty = mortyResult.getResults().get(0);

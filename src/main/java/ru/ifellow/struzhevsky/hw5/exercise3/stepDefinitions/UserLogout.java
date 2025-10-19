@@ -1,7 +1,8 @@
-package ru.ifellow.struzhevsky.hw5.exercise3.steps;
+package ru.ifellow.struzhevsky.hw5.exercise3.stepDefinitions;
 
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Тогда;
+import io.qameta.allure.Step;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -12,6 +13,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.respons
 public class UserLogout {
     private AuthorizationUser authorizationUser = new AuthorizationUser();
 
+    @Step("Выйти из учетной записи без токена")
     @Тогда("пытаюсь выйти из учетной записи без токена")
     public UserLogout logoutUnsuccessTest() {
         given()
@@ -37,6 +39,7 @@ public class UserLogout {
         return this;
     }
 
+    @Step("Выйти из учетной записи с токеном")
     @И("успешно выхожу из учетной записи с токеном")
     public void logouSuccess() {
         logoutSuccessTest(authorizationUser.successCredentialsAuth());
