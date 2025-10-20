@@ -28,12 +28,13 @@ public abstract class BaseTest {
         url = properties.getProperty("url");
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
-                .savePageSource(false)
+                .savePageSource(true)
         );
     }
 
     @BeforeEach
     public void setUp() {
+        SelenideLogger.removeListener("AllureSelenide");
         open(url);
         getWebDriver().manage().window().maximize();
         Configuration.pageLoadStrategy = "eager";
@@ -41,6 +42,7 @@ public abstract class BaseTest {
 
     @AfterEach
     public void reset() {
+        SelenideLogger.removeListener("AllureSelenide");
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();

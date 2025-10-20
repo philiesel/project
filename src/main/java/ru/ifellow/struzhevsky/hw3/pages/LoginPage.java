@@ -1,10 +1,14 @@
 package ru.ifellow.struzhevsky.hw3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Param;
 import io.qameta.allure.Step;
+import io.qameta.allure.model.Parameter;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.page;
+import static io.qameta.allure.model.Parameter.Mode.MASKED;
 
 public class LoginPage extends BasePage {
     private final SelenideElement usernameFieldLocator = $x("//input[@id='login-form-username']").as("Поле Username");
@@ -18,14 +22,15 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("Ввод пароля: {password}")
-    private LoginPage enterPassword(String password) {
+    @Step("Ввод пароля: ")
+    private LoginPage enterPassword(@Param(mode = MASKED) String password) {
         clickAndSet(passwordFieldLocator, password);
         return this;
     }
 
-    @Step("Авторизация пользователем: {username} {password}")
-    public DashboardPage auth(String username, String password) {
+    @Step("Авторизация пользователем: {username}")
+    public DashboardPage auth(String username, @Param(mode = MASKED) String password) {
+        Allure.parameter("password", password, Parameter.Mode.MASKED);
         enterUsername(username);
         enterPassword(password);
         loginButtonLocator.click();

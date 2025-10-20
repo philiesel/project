@@ -13,14 +13,14 @@ public class ServiceData {
         try {
             fileInputStream = new FileInputStream(pathConfig);
             properties.load(fileInputStream);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        } catch (IOException exception) {
+            exception.getStackTrace();
         } finally {
             if (fileInputStream != null) {
                 try {
                     fileInputStream.close();
-                } catch (IOException e) {
-                    System.out.println("Нет такого файла");
+                } catch (IOException exception) {
+                    exception.getStackTrace();
                 }
             }
         }

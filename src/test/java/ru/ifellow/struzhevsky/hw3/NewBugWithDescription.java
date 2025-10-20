@@ -10,6 +10,7 @@ import ru.ifellow.struzhevsky.hw3.utils.TestData;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("Создание нового бага")
 public class NewBugWithDescription extends BaseTest {
     private LoginPage loginPage = new LoginPage();
     private ProjectPage projectPage = new ProjectPage();

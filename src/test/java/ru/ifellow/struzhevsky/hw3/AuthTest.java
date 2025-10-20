@@ -9,6 +9,7 @@ import ru.ifellow.struzhevsky.hw3.utils.TestData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("Авторизация")
 public class AuthTest extends BaseTest {
     private final LoginPage loginPage = new LoginPage();
     private DashboardPage dashboard = new DashboardPage();
