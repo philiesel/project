@@ -3,6 +3,7 @@ package ru.ifellow.struzhevsky.hw5.exercise3.stepDefinitions;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Тогда;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.DisplayName;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -10,6 +11,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProper
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.requestSpec;
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.responseSpec;
 
+@DisplayName("Выход из учетной записи")
 public class UserLogout {
     private AuthorizationUser authorizationUser = new AuthorizationUser();
 

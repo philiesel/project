@@ -4,6 +4,7 @@ import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import ru.ifellow.struzhevsky.hw5.exercise3.utils.CredentialsUser;
 
 import java.util.Map;
@@ -14,6 +15,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProper
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.requestSpec;
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.responseSpec;
 
+@DisplayName("Авторизация пользователя")
 public class AuthorizationUser {
     private CredentialsUser credentialsUser = new CredentialsUser();
 
