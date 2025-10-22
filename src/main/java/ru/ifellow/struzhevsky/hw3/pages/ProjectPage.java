@@ -10,27 +10,35 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ProjectPage {
-    private final SelenideElement countTaskOnProject = $x("//div[@class='showing']/span").as("Надпись кол-во задач");
-    private final SelenideElement linkAllTask = $x("//a[text()='Посмотреть все задачи и фильтры']").as("Все задачи и фильтры");
-    private final SelenideElement buttonCreateTask = $x("//a[@id='create_link']").as("Создать новую задачу");
-    private final SelenideElement metaValueProject = $x("//dd[@class='project-meta-value' and text()='TEST']").as("Тег проекта");
-    private final SelenideElement buttonTask = $x("//a[.//span[@class='aui-nav-item-label' and @title='Задачи']]").as("Кнопка \"Задачи\"");
-    private final SelenideElement buttonAvatar = $x("//a[@title='Test' and contains(@class, 'jira-project-avatar')]").as("Аватарка");
+    private final SelenideElement countTaskOnProject = $x("//div[@class='showing']/span")
+            .as("Надпись кол-во задач");
+    private final SelenideElement linkAllTask = $x("//a[text()='Посмотреть все задачи и фильтры']")
+            .as("Все задачи и фильтры");
+    private final SelenideElement buttonCreateTask = $x("//a[@id='create_link']")
+            .as("Создать новую задачу");
+    private final SelenideElement metaValueProject = $x("//dd[@class='project-meta-value' and text()='TEST']")
+            .as("Тег проекта");
+    private final SelenideElement buttonTask = $x("//a[.//span[@class='aui-nav-item-label' and @title='Задачи']]")
+            .as("Кнопка \"Задачи\"");
+    private final SelenideElement buttonAvatar = $x("//a[@title='Test' and contains(@class, 'jira-project-avatar')]")
+            .as("Аватарка");
+
+    private int parsCountOfString(String line) {
+        String countTask = line.split(" из ")[1];
+        return Integer.parseInt(countTask);
+    }
 
     @Step("Получить количество задач в проекте")
     public int parsCountTaskOnProject() {
         String taskText = countTaskOnProject.shouldBe(Condition.visible, Duration.ofSeconds(5)).text();
-        String countTask = taskText.split(" из ")[1];
-        return Integer.parseInt(countTask);
+        return parsCountOfString(taskText);
     }
 
     @Step("Обновить и получить обновлённое количество задач (предыдущее: {oldCountTask})")
     public int parseUpdateCountTaskOnProject(int oldCountTask) {
         Selenide.refresh();
-        String taskText = countTaskOnProject.should(Condition.visible)
-                .should(Condition.not(Condition.text(String.valueOf(oldCountTask))), Duration.ofSeconds(6)).text();
-        String countTask = taskText.split(" из ")[1];
-        return Integer.parseInt(countTask);
+        String taskText = countTaskOnProject.shouldNotHave(Condition.text(String.valueOf(oldCountTask)), Duration.ofSeconds(20)).text();
+        return parsCountOfString(taskText);
     }
 
     @Step("Открыть меню 'Задачи'")

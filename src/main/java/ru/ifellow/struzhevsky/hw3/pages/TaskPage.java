@@ -9,11 +9,16 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class TaskPage {
-    private final SelenideElement areaFindTask = $x("//input[@id='searcher-query']").as("Строка поиска");
-    private final SelenideElement buttonFind = $x("//button[@class='aui-button aui-button-primary search-button']").as("Кнопка \"Поиска\"");
-    private final SelenideElement statusTask = $x("//span[@id='status-val']").as("Статус задачи");
-    private final SelenideElement statusVersion = $x("//span[@id='fixVersions-field']").as("Версия задачи");
-    private final SelenideElement nameFindTask = $x("//h1[@id='summary-val']").as("Название задачи");
+    private final SelenideElement areaFindTask = $x("//input[@id='searcher-query']")
+            .as("Строка поиска");
+    private final SelenideElement buttonFind = $x("//button[@class='aui-button aui-button-primary search-button']")
+            .as("Кнопка \"Поиска\"");
+    private final SelenideElement statusTask = $x("//span[@id='status-val']")
+            .as("Статус задачи");
+    private final SelenideElement statusVersion = $x("//span[@id='fixVersions-field']")
+            .as("Версия задачи");
+    private final SelenideElement nameFindTask = $x("//h1[@id='summary-val']")
+            .as("Название задачи");
 
     @Step("Поиск задачи по имени: {nameTask}")
     public TaskPage findTask(String nameTask) {
@@ -24,10 +29,9 @@ public class TaskPage {
         return this;
     }
 
-    @Step("Проверка изменения названия задачи {oldTask} - старое значение")
+    @Step("Проверка изменения названия задачи {oldTask}")
     public String checkChangeName(String oldTask) {
-        return nameFindTask.should(Condition.visible)
-                .should(Condition.not(Condition.text(String.valueOf(oldTask))), Duration.ofSeconds(3)).text();
+        return nameFindTask.shouldNotHave(Condition.text(oldTask), Duration.ofSeconds(5)).text();
     }
 
     @Step("Получение статуса задачи")

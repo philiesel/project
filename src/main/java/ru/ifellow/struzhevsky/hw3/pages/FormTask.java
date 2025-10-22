@@ -12,22 +12,38 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FormTask extends BasePage {
-    private SelenideElement typeIssue = $x("//input[@id='issuetype-field']").as("Тип задачи");
-    private SelenideElement areaTopicTask = $x("//input[@id='summary']").as("Поле \"Тема\"");
-    private SelenideElement textArea = $x("//body[@id='tinymce']").as("Текстовое поле");
-    private ElementsCollection buttonVisual = $$x("//button[@type='button' and @class='aui-button' and text()='Визуальный']").as("Кнопка \"Визуальный\"");
-    private SelenideElement buttCreateTask = $x("//input[@id='create-issue-submit' and @value='Создать']").as("Кнопка \"Создать\"");
-    private SelenideElement priorityField = $x("//input[@id='priority-field']").as("Приоритет");
-    private SelenideElement tagLocator = $x("//textarea[@id='labels-textarea']").as("Метки");
-    private SelenideElement taskLocator = $x("//textarea[@id='issuelinks-issues-textarea']").as("Задача");
-    private SelenideElement buttAssignToMeLocator = $x("//button[@id='assign-to-me-trigger']").as("Выбрать меня исполнителем");
-    private SelenideElement affectedVersionsLocator = $x("//select[@id='versions']").as("Затронутые версии");
-    private SelenideElement optionFixVersion = $x("//select[@id='fixVersions']").as("Исправить в версиях");
-    private SelenideElement relatedTasksLocator = $x("//select[@id='issuelinks-linktype']").as("Связанные задачи");
-    private SelenideElement seriousnessLocator = $x("//select[@id='customfield_10400']").as("Серьезность");
-    private SelenideElement sprintOptionLocator = $x("//input[@id='customfield_10104-field']").as("Спринт");
-    private SelenideElement successTaskCreate = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']").as("Тест создан");
-    private ElementsCollection collectionIrames = $$("iframe").as("Коллекция фреймов");
+    private final SelenideElement typeIssue = $x("//input[@id='issuetype-field']")
+            .as("Тип задачи");
+    private final SelenideElement areaTopicTask = $x("//input[@id='summary']")
+            .as("Поле \"Тема\"");
+    private final SelenideElement textArea = $x("//body[@id='tinymce']")
+            .as("Текстовое поле");
+    private final ElementsCollection buttonVisual = $$x("//button[@type='button' and @class='aui-button' and text()='Визуальный']")
+            .as("Кнопка \"Визуальный\"");
+    private final SelenideElement buttCreateTask = $x("//input[@id='create-issue-submit' and @value='Создать']")
+            .as("Кнопка \"Создать\"");
+    private final SelenideElement priorityField = $x("//input[@id='priority-field']")
+            .as("Приоритет");
+    private final SelenideElement tagLocator = $x("//textarea[@id='labels-textarea']")
+            .as("Метки");
+    private final SelenideElement taskLocator = $x("//textarea[@id='issuelinks-issues-textarea']")
+            .as("Задача");
+    private final SelenideElement buttAssignToMeLocator = $x("//button[@id='assign-to-me-trigger']")
+            .as("Выбрать меня исполнителем");
+    private final SelenideElement affectedVersionsLocator = $x("//select[@id='versions']")
+            .as("Затронутые версии");
+    private final SelenideElement optionFixVersion = $x("//select[@id='fixVersions']")
+            .as("Исправить в версиях");
+    private final SelenideElement relatedTasksLocator = $x("//select[@id='issuelinks-linktype']")
+            .as("Связанные задачи");
+    private final SelenideElement seriousnessLocator = $x("//select[@id='customfield_10400']")
+            .as("Серьезность");
+    private final SelenideElement sprintOptionLocator = $x("//input[@id='customfield_10104-field']")
+            .as("Спринт");
+    private final SelenideElement successTaskCreate = $x("//div[@class='aui-message closeable aui-message-success aui-will-close']")
+            .as("Тест создан");
+    private final ElementsCollection collectionFrames = $$("iframe")
+            .as("Коллекция фреймов");
 
     @Step("Выбор типа задачи: {typeBag}")
     public FormTask selectTypeBug(String typeBag) {
@@ -47,8 +63,7 @@ public class FormTask extends BasePage {
     @Step("Установка тега: {tag}")
     public FormTask setTag(String tag) {
         clickAndSet(tagLocator, tag);
-        tagLocator.shouldBe(visible).sendKeys(Keys.DOWN);
-        tagLocator.pressEnter();
+        tagLocator.shouldBe(visible).sendKeys(Keys.DOWN, Keys.ENTER);
         switchTo().defaultContent();
         return this;
     }
@@ -64,8 +79,7 @@ public class FormTask extends BasePage {
     @Step("Выбор спринта: {sprint}")
     public FormTask setSprint(String sprint) {
         clickAndSet(sprintOptionLocator, sprint);
-        sprintOptionLocator.shouldBe(visible).sendKeys(Keys.DOWN);
-        sprintOptionLocator.pressTab();
+        sprintOptionLocator.shouldBe(visible).sendKeys(Keys.DOWN, Keys.TAB);
         return this;
     }
 
@@ -84,7 +98,7 @@ public class FormTask extends BasePage {
     }
 
     @Step("Установка версии исправления: {version}")
-    public FormTask setfixVersion(String version) {
+    public FormTask setFixVersion(String version) {
         optionFixVersion.selectOptionContainingText(version);
         return this;
     }
@@ -95,26 +109,23 @@ public class FormTask extends BasePage {
         return this;
     }
 
-    @Step("Ввод описания задачи")
-    public FormTask setDescriptionTask(String descriptionIssue) {
-        SelenideElement iframeEnv = collectionIrames.get(0);
-        iframeEnv.scrollTo();
-        switchTo().frame(iframeEnv);
-        textArea.click();
-        textArea.setValue(descriptionIssue);
+    private FormTask switchToFrameSetText(int frameIndex, String text) {
+        SelenideElement iframe = collectionFrames.get(frameIndex);
+        iframe.scrollTo();
+        switchTo().frame(iframe);
+        textArea.shouldBe(visible).setValue(text);
         switchTo().defaultContent();
         return this;
     }
 
+    @Step("Ввод описания задачи")
+    public FormTask setDescriptionTask(String descriptionIssue) {
+        return switchToFrameSetText(0, descriptionIssue);
+    }
+
     @Step("Ввод описания окружения")
     public FormTask setEnvironmentDescription(String environmentDescription) {
-        SelenideElement iframeEnv = collectionIrames.get(1);
-        iframeEnv.scrollTo();
-        switchTo().frame(iframeEnv);
-        textArea.click();
-        textArea.setValue(environmentDescription);
-        switchTo().defaultContent();
-        return this;
+        return switchToFrameSetText(1, environmentDescription);
     }
 
     @Step("Указание связанных задач: {related}")

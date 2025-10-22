@@ -3,6 +3,7 @@ package ru.ifellow.struzhevsky.hw3;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,6 +36,7 @@ public abstract class BaseTest {
     @BeforeEach
     public void setUp() {
         SelenideLogger.removeListener("AllureSelenide");
+        Allure.step("Веб-сайт открыт");
         open(url);
         getWebDriver().manage().window().maximize();
         Configuration.pageLoadStrategy = "eager";
@@ -42,6 +44,7 @@ public abstract class BaseTest {
 
     @AfterEach
     public void reset() {
+        Allure.step("Веб-сайт закрыт");
         SelenideLogger.removeListener("AllureSelenide");
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();

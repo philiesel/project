@@ -10,7 +10,6 @@ public class TestData {
     public static final String AFFECTED_VERSION = "Неизвестный";
     public static final String ENVIRONMENT_DESCRIPTION = "Описание окружения";
     public static final String TASK = "TEST-121544";
-    public static final String EPIC = "epic";
     public static final String SPRINT = "Доска Спринт 2";
     public static final String SERIOUSNESS = "S2 Значительный/Major";
     public static final String RELATED_TASK = "blocks";

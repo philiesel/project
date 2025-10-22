@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Проверка статуса и версии задачи")
 public class TaskTest extends BaseTest {
-    private LoginPage loginPage = new LoginPage();
-    private ProjectPage projectPage = new ProjectPage();
-    private DashboardPage dashboardPage = new DashboardPage();
-    private TaskPage taskPage = new TaskPage();
+    private final LoginPage loginPage = new LoginPage();
+    private final ProjectPage projectPage = new ProjectPage();
+    private final DashboardPage dashboardPage = new DashboardPage();
+    private final TaskPage taskPage = new TaskPage();
 
     @Test
     @DisplayName("Проверка статуса и версии в задаче проекта")

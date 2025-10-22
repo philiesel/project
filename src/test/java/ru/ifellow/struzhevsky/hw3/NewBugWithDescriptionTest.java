@@ -11,11 +11,11 @@ import ru.ifellow.struzhevsky.hw3.utils.TestData;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Создание нового бага")
-public class NewBugWithDescription extends BaseTest {
-    private LoginPage loginPage = new LoginPage();
-    private ProjectPage projectPage = new ProjectPage();
-    private DashboardPage dashboardPage = new DashboardPage();
-    private FormTask formTask = new FormTask();
+public class NewBugWithDescriptionTest extends BaseTest {
+    private final LoginPage loginPage = new LoginPage();
+    private final ProjectPage projectPage = new ProjectPage();
+    private final DashboardPage dashboardPage = new DashboardPage();
+    private final FormTask formTask = new FormTask();
 
     @Test
     @DisplayName("Проверка заведения нового бага с описанием")
@@ -28,7 +28,7 @@ public class NewBugWithDescription extends BaseTest {
                 .selectTypeBug(TestData.TYPE_BUG)
                 .setFieldTopicTask(TestData.TOPIC_BUG)
                 .setDescriptionTask(TestData.DESCRIPTION_TASK)
-                .setfixVersion(TestData.FIX_VERSION)
+                .setFixVersion(TestData.FIX_VERSION)
                 .selectPriorityField(TestData.PRIORITY)
                 .setTag(TestData.TAG)
                 .setEnvironmentDescription(TestData.ENVIRONMENT_DESCRIPTION)

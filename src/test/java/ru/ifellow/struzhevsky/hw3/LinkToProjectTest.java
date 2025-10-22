@@ -1,6 +1,5 @@
 package ru.ifellow.struzhevsky.hw3;
 
-import io.qameta.allure.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,7 +18,6 @@ public class LinkToProjectTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"TEST"})
     @DisplayName("Пользователь может перейти в проект")
-    @Description("Пользователь успешно переходит в проект Test и видит свой никнейм.")
     public void goToProjectTest(String metaValue) {
         loginPage.auth(BaseTest.username, BaseTest.password);
         dashboardPage.goToProjectTest();

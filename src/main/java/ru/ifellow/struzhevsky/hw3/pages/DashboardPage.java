@@ -9,19 +9,28 @@ import static com.codeborne.selenide.Selenide.page;
 
 
 public class DashboardPage {
-    private final SelenideElement buttonProfileLocator = $x("//a[@id='header-details-user-fullname']").as("Пользовательский профиль");
-    private final SelenideElement linkProfileLocator = $x("//a[@id='view_profile']").as("Меню \"Профиль\"");
-    private final SelenideElement menuProject = $x("//a[@id='browse_link']").as("Меню \"Проекты\"");
-    private final SelenideElement linkProjectTest = $x("//a[@id='admin_main_proj_link_lnk']").as("Меню проект \"Test\"");
+    private final SelenideElement buttonProfileLocator = $x("//a[@id='header-details-user-fullname']")
+            .as("Пользовательский профиль");
+    private final SelenideElement linkProfileLocator = $x("//a[@id='view_profile']")
+            .as("Меню \"Профиль\"");
+    private final SelenideElement menuProject = $x("//a[@id='browse_link']")
+            .as("Меню \"Проекты\"");
+    private final SelenideElement linkProjectTest = $x("//a[@id='admin_main_proj_link_lnk']")
+            .as("Меню проект \"Test\"");
 
-    @Step("Перейти в раздел \"Профиль\"")
+    @Step("Открыть меню профиля")
+    private void openProfileMenu() {
+        buttonProfileLocator.shouldBe(Condition.visible, Condition.enabled).click();
+    }
+
+    @Step("Перейти в раздел 'Профиль'")
     public ProfilePage goToProfile() {
-        buttonProfileLocator.click();
+        openProfileMenu();
         linkProfileLocator.shouldBe(Condition.visible).click();
         return page(ProfilePage.class);
     }
 
-    @Step("Перейти в проект")
+    @Step("Перейти в проект 'Test'")
     public ProjectPage goToProjectTest() {
         menuProject.shouldBe(Condition.visible).click();
         linkProjectTest.click();

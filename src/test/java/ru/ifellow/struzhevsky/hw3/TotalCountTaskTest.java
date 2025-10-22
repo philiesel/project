@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Проверка общего количества задач в проекте")
 public class TotalCountTaskTest extends BaseTest {
-    private LoginPage loginPage = new LoginPage();
-    private ProjectPage projectPage = new ProjectPage();
-    private DashboardPage dashboardPage = new DashboardPage();
-    private FormTask formTask = new FormTask();
+    private final LoginPage loginPage = new LoginPage();
+    private final ProjectPage projectPage = new ProjectPage();
+    private final DashboardPage dashboardPage = new DashboardPage();
+    private final FormTask formTask = new FormTask();
 
     @Test
     @DisplayName("Проверка общего количества заведенных задач в проекте")
