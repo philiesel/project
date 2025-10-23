@@ -6,7 +6,9 @@ import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.FormTask;
 import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
 import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
-import ru.ifellow.struzhevsky.hw3.utils.TestData;
+import ru.ifellow.struzhevsky.hw3.utils.ServiceData;
+
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,6 +18,7 @@ public class TotalCountTaskTest extends BaseTest {
     private final ProjectPage projectPage = new ProjectPage();
     private final DashboardPage dashboardPage = new DashboardPage();
     private final FormTask formTask = new FormTask();
+    private final Properties properties = ServiceData.getDataOnFile();
 
     @Test
     @DisplayName("Проверка общего количества заведенных задач в проекте")
@@ -25,8 +28,8 @@ public class TotalCountTaskTest extends BaseTest {
         projectPage.clickMenuTask();
         int countTask = projectPage.parsCountTaskOnProject();
         projectPage.clickButtNewTask();
-        formTask.selectTypeBug(TestData.TYPE_BUG_ISSUE)
-                .setFieldTopicTask(TestData.DESCRIPTION_TASK)
+        formTask.selectTypeTask(properties.getProperty("TYPE_BUG_ISSUE"))
+                .setFieldTopicTask(properties.getProperty("DESCRIPTION_TASK"))
                 .clickButtCreateNewIssue();
         int updateCountTask = projectPage.parseUpdateCountTaskOnProject(countTask);
         assertTrue(updateCountTask > countTask, "Ожидалось, что количество задач увеличится, но оно не увеличилось");

@@ -30,15 +30,20 @@ public class ProjectPage {
 
     @Step("Получить количество задач в проекте")
     public int parsCountTaskOnProject() {
-        String taskText = countTaskOnProject.shouldBe(Condition.visible, Duration.ofSeconds(5)).text();
+        String taskText = countTaskOnProject.shouldBe(Condition.visible, Duration.ofSeconds(10)).text();
         return parsCountOfString(taskText);
     }
 
     @Step("Обновить и получить обновлённое количество задач (предыдущее: {oldCountTask})")
     public int parseUpdateCountTaskOnProject(int oldCountTask) {
         Selenide.refresh();
-        String taskText = countTaskOnProject.shouldNotHave(Condition.text(String.valueOf(oldCountTask)), Duration.ofSeconds(20)).text();
-        return parsCountOfString(taskText);
+        int newCountTask = parsCountTaskOnProject();
+        if (oldCountTask == newCountTask) {
+            Selenide.refresh();
+            return parsCountTaskOnProject();
+        } else {
+            return newCountTask;
+        }
     }
 
     @Step("Открыть меню 'Задачи'")

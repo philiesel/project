@@ -6,7 +6,9 @@ import ru.ifellow.struzhevsky.hw3.pages.DashboardPage;
 import ru.ifellow.struzhevsky.hw3.pages.LoginPage;
 import ru.ifellow.struzhevsky.hw3.pages.ProjectPage;
 import ru.ifellow.struzhevsky.hw3.pages.TaskPage;
-import ru.ifellow.struzhevsky.hw3.utils.TestData;
+import ru.ifellow.struzhevsky.hw3.utils.ServiceData;
+
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,6 +18,7 @@ public class TaskTest extends BaseTest {
     private final ProjectPage projectPage = new ProjectPage();
     private final DashboardPage dashboardPage = new DashboardPage();
     private final TaskPage taskPage = new TaskPage();
+    private final Properties properties = ServiceData.getDataOnFile();
 
     @Test
     @DisplayName("Проверка статуса и версии в задаче проекта")
@@ -25,10 +28,10 @@ public class TaskTest extends BaseTest {
         projectPage.clickMenuTask()
                 .clickLinkAllTask();
         String oldNameTest = taskPage.getNameTest();
-        taskPage.findTask(TestData.FIND_TASK)
+        taskPage.findTask(properties.getProperty("FIND_TASK"))
                 .checkChangeName(oldNameTest);
-        assertEquals(TestData.FIND_TASK, taskPage.getNameTest());
-        assertEquals(TestData.STATUS_TASK.toUpperCase(), taskPage.checkStatus());
-        assertEquals(TestData.VERSION_TASK, taskPage.checkVersion());
+        assertEquals(properties.getProperty("FIND_TASK"), taskPage.getNameTest());
+        assertEquals(properties.getProperty("STATUS_TASK").toUpperCase(), taskPage.checkStatus());
+        assertEquals(properties.getProperty("VERSION_TASK"), taskPage.checkVersion());
     }
 }

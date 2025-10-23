@@ -45,12 +45,12 @@ public class FormTask extends BasePage {
     private final ElementsCollection collectionFrames = $$("iframe")
             .as("Коллекция фреймов");
 
-    @Step("Выбор типа задачи: {typeBag}")
-    public FormTask selectTypeBug(String typeBag) {
+    @Step("Выбор типа задачи: {typeTask}")
+    public FormTask selectTypeTask(String typeTask) {
         typeIssue.click();
         typeIssue.clear();
         typeIssue.click();
-        typeIssue.sendKeys(typeBag);
+        typeIssue.sendKeys(typeTask);
         return this;
     }
 

@@ -35,7 +35,6 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        SelenideLogger.removeListener("AllureSelenide");
         Allure.step("Веб-сайт открыт");
         open(url);
         getWebDriver().manage().window().maximize();
