@@ -6,6 +6,8 @@ import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import ru.ifellow.struzhevsky.hw5.exercise1.api.BaseApi;
 import ru.ifellow.struzhevsky.hw5.exercise1.dto.CharacterDto;
 import ru.ifellow.struzhevsky.hw5.exercise1.dto.EpisodeDto;
@@ -15,6 +17,8 @@ import ru.ifellow.struzhevsky.hw5.exercise1.utils.UtilsRickAndMorty;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProperty;
 
+@DisplayName("Проверка персонажа")
+@Tag("RickAndMorty-001")
 public class RickAndMortyStepsDefinitions {
     private final BaseApi baseApi = new BaseApi();
     private final UtilsRickAndMorty utils = new UtilsRickAndMorty();

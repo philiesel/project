@@ -20,7 +20,7 @@ public class CredentialsUser {
             if (username != null) creds.put("username", username);
             if (password != null) creds.put("password", password);
         } catch (IOException exception) {
-            exception.printStackTrace();
+            exception.getStackTrace();
         }
         return creds;
     }
@@ -39,7 +39,7 @@ public class CredentialsUser {
         try {
             data = mapper.readValue(file, Map.class);
         } catch (IOException exception) {
-            exception.printStackTrace();
+            exception.getStackTrace();
         }
         return data;
     }

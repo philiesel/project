@@ -2,9 +2,12 @@ package ru.ifellow.struzhevsky.hw5.exercise3.stepDefinitions;
 
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Тогда;
+import io.qameta.allure.Param;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 
+import static io.qameta.allure.model.Parameter.Mode.MASKED;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static ru.ifellow.struzhevsky.hw5.exercise2.utils.Configuration.getProperty;
@@ -12,6 +15,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.request
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.responseSpec;
 
 @DisplayName("Выход из учетной записи")
+@Tag("UserLogout-001")
 public class UserLogout {
     private AuthorizationUser authorizationUser = new AuthorizationUser();
 
@@ -29,7 +33,7 @@ public class UserLogout {
         return this;
     }
 
-    public UserLogout logoutSuccessTest(String token) {
+    private UserLogout logoutSuccessTest(@Param(mode = MASKED) String token) {
         given()
                 .spec(requestSpec())
                 .header("Authorization", token)

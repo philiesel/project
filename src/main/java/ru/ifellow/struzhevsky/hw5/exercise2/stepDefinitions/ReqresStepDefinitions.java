@@ -6,6 +6,8 @@ import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import ru.ifellow.struzhevsky.hw5.exercise2.api.UserApiReqres;
 import ru.ifellow.struzhevsky.hw5.exercise2.utils.ServiceJson;
 
@@ -13,6 +15,8 @@ import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
 
+@DisplayName("Проверка создания нового пользователя")
+@Tag("Reqres-001")
 public class ReqresStepDefinitions {
     private ValidatableResponse response;
     private Map<String, String> data;

@@ -3,6 +3,7 @@ package ru.ifellow.struzhevsky.hw5.exercise3.stepDefinitions;
 import io.cucumber.java.ru.Когда;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 
 import java.io.File;
 
@@ -12,6 +13,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.request
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.responseSpec;
 
 @DisplayName("Регистрация пользователя")
+@Tag("Registration_User-001")
 public class Registration {
     private final File jsonFile = new File(getProperty("pathCredentials"));
 

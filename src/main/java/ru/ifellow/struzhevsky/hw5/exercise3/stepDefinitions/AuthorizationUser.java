@@ -5,6 +5,7 @@ import io.cucumber.java.ru.Тогда;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import ru.ifellow.struzhevsky.hw5.exercise3.utils.CredentialsUser;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.request
 import static ru.ifellow.struzhevsky.hw5.exercise3.api.SpecifactionsAuth.responseSpec;
 
 @DisplayName("Авторизация пользователя")
+@Tag("Auth_User-001")
 public class AuthorizationUser {
     private CredentialsUser credentialsUser = new CredentialsUser();
 
