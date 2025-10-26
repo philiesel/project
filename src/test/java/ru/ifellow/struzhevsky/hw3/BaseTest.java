@@ -26,10 +26,14 @@ public abstract class BaseTest {
         properties = ServiceData.getDataOnFile();
         username = properties.getProperty("username");
         password = properties.getProperty("password");
+        boolean screenshots = Boolean.parseBoolean(properties.getProperty("allure.selenide.screenshots"));
+        boolean allureReportPath = Boolean.parseBoolean(properties.getProperty("allure.selenide.savePageSource"));
+        boolean includeSelenideSteps = Boolean.parseBoolean(properties.getProperty("allure.selenide.includeSelenideSteps"));
         url = properties.getProperty("url");
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(true)
+                .screenshots(screenshots)
+                .savePageSource(allureReportPath)
+                .includeSelenideSteps(includeSelenideSteps)
         );
     }
 
