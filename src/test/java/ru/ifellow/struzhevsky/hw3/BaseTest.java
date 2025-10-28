@@ -15,6 +15,8 @@ import ru.ifellow.struzhevsky.hw3.utils.ServiceData;
 
 import java.util.Properties;
 
+import static com.codeborne.selenide.Selenide.open;
+
 public abstract class BaseTest {
     private static Properties properties;
     public static String username;
@@ -45,9 +47,9 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        driver.get(url);
-        driver.manage().window().maximize();
         Configuration.pageLoadStrategy = "eager";
+        Configuration.headless = true;
+        open(url);
     }
 
     @AfterEach
