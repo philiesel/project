@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'HWF_API', url: 'https://github.com/philiesel/project'
+                git branch: 'HWF_API', url: 'https://github.com/philiesel/project.git'
             }
         }
 
