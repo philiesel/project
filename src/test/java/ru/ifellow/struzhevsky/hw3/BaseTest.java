@@ -3,22 +3,25 @@ package ru.ifellow.struzhevsky.hw3;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import ru.ifellow.struzhevsky.hw3.utils.ServiceData;
 
 import java.util.Properties;
-
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public abstract class BaseTest {
     private static Properties properties;
     public static String username;
     public static String password;
     public static String url;
+    private static WebDriver driver;
+
 
     @BeforeAll
     public static void setLoginAndPass() {
@@ -26,6 +29,14 @@ public abstract class BaseTest {
         username = properties.getProperty("username");
         password = properties.getProperty("password");
         url = properties.getProperty("url");
+
+        WebDriverManager.chromedriver().setup();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        driver = new ChromeDriver(options);
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false)
@@ -34,8 +45,8 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        open(url);
-        getWebDriver().manage().window().maximize();
+        driver.get(url);
+        driver.manage().window().maximize();
         Configuration.pageLoadStrategy = "eager";
     }
 
@@ -43,6 +54,8 @@ public abstract class BaseTest {
     public void reset() {
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
-        Selenide.closeWebDriver();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

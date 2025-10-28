@@ -21,18 +21,6 @@ pipeline {
             }
         }
 
-         stage('Установить WebDriver') {
-            steps {
-                script {
-                    if (BROWSER == 'chrome') {
-                        sh 'java -jar webdriver-manager.jar chrome'
-                    } else if (BROWSER == 'firefox') {
-                        sh 'java -jar webdriver-manager.jar firefox'
-                    }
-                }
-            }
-         }
-
         stage('Build') {
             steps {
                 sh "'$MAVEN_WRAPPER' clean install"
