@@ -3,12 +3,13 @@ pipeline {
 
     environment {
         MAVEN_WRAPPER = './mvnw'
+        BROWSER = 'chrome'
     }
 
     stages {
-        stage('Checkout') {
+        stage('Переключаемся на нужную ветку') {
             steps {
-                git branch: 'IF_HW6', url: 'https://github.com/philiesel/project.git'
+                git branch: 'jenkins_test', url: 'https://github.com/philiesel/project.git'
             }
         }
 
@@ -19,6 +20,18 @@ pipeline {
                 }
             }
         }
+
+         stage('Установить WebDriver') {
+            steps {
+                script {
+                    if (BROWSER == 'chrome') {
+                        sh 'java -jar webdriver-manager.jar chrome'
+                    } else if (BROWSER == 'firefox') {
+                        sh 'java -jar webdriver-manager.jar firefox'
+                    }
+                }
+            }
+         }
 
         stage('Build') {
             steps {
@@ -34,7 +47,7 @@ pipeline {
 
         stage('Deploy') {
             when {
-                branch 'IF_HW6'
+                branch 'jenkins_test'
             }
             steps {
                 echo 'Развертывание приложения...'
