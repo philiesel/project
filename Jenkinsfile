@@ -12,6 +12,14 @@ pipeline {
             }
         }
 
+        stage('Сделать исполняемым mvnw') {
+            steps {
+                script {
+                    sh 'chmod +x mvnw'
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh "'$MAVEN_WRAPPER' clean install"
