@@ -1,11 +1,10 @@
 pipeline {
     agent {
         docker {
-            image 'selenium/standalone-chrome'
-            args '-u root --privileged'
+            image 'jenkins-agent-chrome:latest'
+            args '-u root:root'
         }
     }
-
     environment {
         MAVEN_WRAPPER = './mvnw'
         BROWSER = 'chrome'
