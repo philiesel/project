@@ -1,10 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'jenkins-agent-chrome:latest'
-            args '-u root:root'
-        }
-    }
+    agent { label 'custom-agent' }
+
     environment {
         MAVEN_WRAPPER = './mvnw'
         BROWSER = 'chrome'
