@@ -27,8 +27,9 @@ public class ProjectPage {
     @Step("Обновить и получить обновлённое количество задач (предыдущее: {oldCountTask})")
     public int parseUpdateCountTaskOnProject(int oldCountTask) {
         Selenide.refresh();
+        Selenide.sleep(5);
         String taskText = countTaskOnProject.should(Condition.visible)
-                .should(Condition.not(Condition.text(String.valueOf(oldCountTask))), Duration.ofSeconds(6)).text();
+                .should(Condition.not(Condition.text(String.valueOf(oldCountTask))), Duration.ofSeconds(10)).text();
         String countTask = taskText.split(" из ")[1];
         return Integer.parseInt(countTask);
     }

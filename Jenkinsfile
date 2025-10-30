@@ -20,19 +20,17 @@ pipeline {
 
         stage('Права на запуск mvnw') {
             steps {
-                script {
-                    sh 'chmod +x mvnw'
-                }
+                sh 'chmod +x mvnw'
             }
         }
 
         stage('Build') {
             steps {
                 echo "Запускаем тесты через Maven Wrapper"
-                sh "'$MAVEN_WRAPPER' clean test -Dmaven.test.failure.ignore=false"
+                sh "${MAVEN_WRAPPER} clean test -Dmaven.test.failure.ignore=false"
             }
         }
-
+    }
     post {
         success {
             echo 'Сборка и испытания завершены успешно!'
