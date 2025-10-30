@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'selenium/standalone-chrome'
+            args '-u root --privileged'
+        }
+    }
 
     environment {
         MAVEN_WRAPPER = './mvnw'
@@ -13,7 +18,7 @@ pipeline {
             }
         }
 
-        stage('Сделать исполняемым mvnw') {
+        stage('Права на запуск mvnw') {
             steps {
                 script {
                     sh 'chmod +x mvnw'
@@ -23,25 +28,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "'$MAVEN_WRAPPER' clean install"
+                echo "Запускаем тесты через Maven Wrapper"
+                sh "'$MAVEN_WRAPPER' clean test -Dmaven.test.failure.ignore=false"
             }
         }
-
-        stage('Test') {
-            steps {
-                sh "'$MAVEN_WRAPPER' test"
-            }
-        }
-
-        stage('Deploy') {
-            when {
-                branch 'jenkins_test'
-            }
-            steps {
-                echo 'Развертывание приложения...'
-            }
-        }
-    }
 
     post {
         success {
